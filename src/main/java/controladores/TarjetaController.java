@@ -35,5 +35,6 @@ public class TarjetaController implements Initializable {
     @FXML
     private void abrirInfo(ActionEvent event) {
     }
+
     
 }

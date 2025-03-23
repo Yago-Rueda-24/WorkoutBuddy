@@ -1,0 +1,14 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+AnchorPane {
+    -fx-border-color: black;  /* Color del borde */
+    -fx-border-width: 5px;    /* Ancho del borde */
+    -fx-border-radius: 10px;  /* Radio del borde (bordes redondeados) */
+    -fx-padding: 10px;        /* Espacio interno alrededor de los elementos */
+    -fx-background-color: #f0f0f0;  /* Color de fondo del AnchorPane */
+}

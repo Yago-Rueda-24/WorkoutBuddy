@@ -4,10 +4,15 @@
  */
 package controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -18,14 +23,32 @@ import javafx.scene.layout.VBox;
 public class MainpageController implements Initializable {
 
     @FXML
-    private VBox lista;
+    private GridPane grid;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    prueba();
+        
+        
+    }
+
+    public void prueba() {
+        try {
+            // Cargar el FXML de la tarjeta
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tarjeta.fxml"));
+            AnchorPane tarjeta = loader.load();  // Cargar la tarjeta
+
+            // Obtener el controlador de la tarjeta
+
+            // Añadir la tarjeta al contenedor
+          grid.add(tarjeta, 0, 0);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
