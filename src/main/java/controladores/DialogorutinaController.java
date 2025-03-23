@@ -6,23 +6,24 @@ package controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author yago
  */
-public class TarjetaController implements Initializable {
+public class DialogorutinaController implements Initializable {
 
     @FXML
-    private Label LName;
+    private TextField TFNombre;
     @FXML
-    private Button BTNInfo;
+    private Button BTNCancelar;
+    @FXML
+    private Button BTNCrear;
 
     /**
      * Initializes the controller class.
@@ -31,7 +32,5 @@ public class TarjetaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-
     
 }
