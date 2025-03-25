@@ -6,10 +6,13 @@ package controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import servicios.RutinaServicios;
+import utiles.Database;
 
 /**
  * FXML Controller class
@@ -18,6 +21,8 @@ import javafx.scene.control.TextField;
  */
 public class DialogorutinaController implements Initializable {
 
+    private RutinaServicios service;
+    
     @FXML
     private TextField TFNombre;
     @FXML
@@ -30,7 +35,19 @@ public class DialogorutinaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        service = new RutinaServicios();
     }    
+
+    @FXML
+    private void cancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void anadirRutina(ActionEvent event) {
+        if(service.crearRutina(TFNombre.getText())){
+            System.out.println("Salio Bien");
+        }
+        
+    }
     
 }
