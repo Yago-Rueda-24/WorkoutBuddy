@@ -13,7 +13,14 @@ public class RutinaServicios {
 
     public boolean crearRutina(String nombre) {
         String sql = "INSERT into rutina (nombre) values (?)";
-        Database.getInstance().insertData(sql,nombre);
-        return true;
+        String sqlcount = "SELECT COUNT(*) FROM rutina WHERE nombre == ?";
+        int coincidencias = Database.getInstance().contarFilas(sqlcount, nombre);
+        if (coincidencias == 0) {
+            Database.getInstance().insertData(sql, nombre);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

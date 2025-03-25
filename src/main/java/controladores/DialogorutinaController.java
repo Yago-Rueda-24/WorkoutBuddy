@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import servicios.RutinaServicios;
 import utiles.Database;
 
@@ -22,7 +23,7 @@ import utiles.Database;
 public class DialogorutinaController implements Initializable {
 
     private RutinaServicios service;
-    
+
     @FXML
     private TextField TFNombre;
     @FXML
@@ -36,18 +37,23 @@ public class DialogorutinaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         service = new RutinaServicios();
-    }    
+    }
 
     @FXML
     private void cancelar(ActionEvent event) {
+        Stage stage = (Stage) BTNCancelar.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void anadirRutina(ActionEvent event) {
-        if(service.crearRutina(TFNombre.getText())){
-            System.out.println("Salio Bien");
+        if (service.crearRutina(TFNombre.getText())) {
+            Stage stage = (Stage) BTNCrear.getScene().getWindow();
+            stage.close();
+        }else{
+            System.out.println("Ya existe una rutina con ese nombre");
         }
-        
+
     }
-    
+
 }
