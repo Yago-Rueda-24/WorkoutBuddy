@@ -14,6 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 public class Database {
 
@@ -121,6 +124,7 @@ public class Database {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
         }
     }
 
@@ -142,6 +146,20 @@ public class Database {
             e.printStackTrace();
         }
         return count;
+    }
+
+    public <T> List<T> executeQueryPojo(Class<T> pojoClass, String sql, Object... params) throws Exception {
+        Connection conn = null;
+        try {
+            conn = this.connect();
+            BeanListHandler<T> beanListHandler = new BeanListHandler<>(pojoClass);
+            QueryRunner runner = new QueryRunner();
+            return runner.query(conn, sql, beanListHandler, params);
+        } catch (SQLException e) {
+            throw new Exception();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
     }
 
 }
