@@ -23,6 +23,10 @@ public class TarjetaController implements Initializable {
     private Label LName;
     @FXML
     private Button BTNInfo;
+    @FXML
+    private Button BTNBorrar;
+    @FXML
+    private Label LNombre;
 
     /**
      * Initializes the controller class.
@@ -31,6 +35,14 @@ public class TarjetaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void muestraRutina(ActionEvent event) {
+    }
+
+    @FXML
+    private void borraTarjeta(ActionEvent event) {
+    }
 
 
     

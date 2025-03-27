@@ -11,6 +11,8 @@
     </stylesheets>
    <children>
       <Label fx:id="LName" layoutX="14.0" layoutY="14.0" />
-      <Button fx:id="BTNInfo" layoutX="78.0" layoutY="107.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="BTNInfo" layoutX="142.0" layoutY="126.0" mnemonicParsing="false" onAction="#muestraRutina" text="Button" />
+      <Button fx:id="BTNBorrar" layoutX="14.0" layoutY="126.0" mnemonicParsing="false" onAction="#borraTarjeta" text="Button" />
+      <Label fx:id="LNombre" layoutX="14.0" layoutY="14.0" text="Label" />
    </children>
 </AnchorPane>

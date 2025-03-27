@@ -27,10 +27,11 @@ import javafx.stage.Stage;
  */
 public class MainpageController implements Initializable {
 
-    @FXML
     private GridPane grid;
     @FXML
     private MenuItem MNRutina;
+    @FXML
+    private VBox lista;
 
     /**
      * Initializes the controller class.
@@ -38,19 +39,24 @@ public class MainpageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         prueba();
-
     }
 
     public void prueba() {
         try {
+            int i;
+            for (i = 0; i <= 7; i++) {
+                // Cargar la tarjeta
+                // Obtener el controlador de la tarjeta
+                // Añadir la tarjeta al contenedor
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tarjeta.fxml"));
+                AnchorPane tarjeta = loader.load();
+
+                lista.getChildren().add(tarjeta);
+
+            }
+
             // Cargar el FXML de la tarjeta
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tarjeta.fxml"));
-            AnchorPane tarjeta = loader.load();  // Cargar la tarjeta
-
-            // Obtener el controlador de la tarjeta
-            // Añadir la tarjeta al contenedor
-            grid.add(tarjeta, 0, 0);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,19 +65,18 @@ public class MainpageController implements Initializable {
     @FXML
     private void abreDialogo(ActionEvent event) {
         try {
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dialogorutina.fxml"));
-            AnchorPane dialogo = loader.load();  
+            AnchorPane dialogo = loader.load();
 
             DialogorutinaController controller = loader.getController();
-            
+
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Añadir Registro");
             dialogStage.setScene(new Scene(dialogo));
 
-         
             dialogStage.showAndWait();
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
