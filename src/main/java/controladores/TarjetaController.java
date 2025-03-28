@@ -19,6 +19,8 @@ import javafx.scene.control.Label;
  */
 public class TarjetaController implements Initializable {
 
+    
+
     @FXML
     private Label LName;
     @FXML
@@ -34,7 +36,7 @@ public class TarjetaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void muestraRutina(ActionEvent event) {
@@ -44,6 +46,10 @@ public class TarjetaController implements Initializable {
     private void borraTarjeta(ActionEvent event) {
     }
 
-
     
+
+    public void setNombre(String nombre) {
+        LNombre.setText(nombre);
+    }
+
 }

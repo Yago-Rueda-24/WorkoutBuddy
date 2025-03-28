@@ -1,16 +1,18 @@
 package servicios;
 
-import entidades.Ejercicio;
+import entidades.Rutina;
 import java.util.ArrayList;
+import java.util.List;
 import utiles.Database;
 
 public class RutinaServicios {
-
-    public ArrayList<Ejercicio> recuperaEjercicios() {
+    
+    public ArrayList<Rutina> recuperaRutinas() throws Exception {
         String sql = "SELECT * from rutina";
-        return null;
+        List<Rutina> auxlist = Database.getInstance().executeQueryPojo(Rutina.class, sql);
+        return new ArrayList<>(auxlist);
     }
-
+    
     public boolean crearRutina(String nombre) {
         String sql = "INSERT into rutina (nombre) values (?)";
         String sqlcount = "SELECT COUNT(*) FROM rutina WHERE nombre == ?";
@@ -21,6 +23,6 @@ public class RutinaServicios {
         } else {
             return false;
         }
-
+        
     }
 }

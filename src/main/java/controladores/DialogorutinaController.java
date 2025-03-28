@@ -23,6 +23,7 @@ import utiles.Database;
 public class DialogorutinaController implements Initializable {
 
     private RutinaServicios service;
+    private MainpageController maincontroller;
 
     @FXML
     private TextField TFNombre;
@@ -37,6 +38,11 @@ public class DialogorutinaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         service = new RutinaServicios();
+        
+    }
+
+    public void setMainController(MainpageController controller) {
+        this.maincontroller = controller;
     }
 
     @FXML
@@ -48,9 +54,10 @@ public class DialogorutinaController implements Initializable {
     @FXML
     private void anadirRutina(ActionEvent event) {
         if (service.crearRutina(TFNombre.getText())) {
+            maincontroller.actualizarRutinas();
             Stage stage = (Stage) BTNCrear.getScene().getWindow();
             stage.close();
-        }else{
+        } else {
             System.out.println("Ya existe una rutina con ese nombre");
         }
 
