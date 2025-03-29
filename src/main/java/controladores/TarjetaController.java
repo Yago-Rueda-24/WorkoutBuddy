@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import servicios.RutinaServicios;
 
 /**
  * FXML Controller class
@@ -19,7 +20,7 @@ import javafx.scene.control.Label;
  */
 public class TarjetaController implements Initializable {
 
-    
+    private RutinaServicios service;
 
     @FXML
     private Label LName;
@@ -29,13 +30,18 @@ public class TarjetaController implements Initializable {
     private Button BTNBorrar;
     @FXML
     private Label LNombre;
+    private MainpageController maincontroller;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        service = new RutinaServicios();
+    }
+
+    public void setMainController(MainpageController controller) {
+        this.maincontroller = controller;
     }
 
     @FXML
@@ -44,9 +50,10 @@ public class TarjetaController implements Initializable {
 
     @FXML
     private void borraTarjeta(ActionEvent event) {
+        if (service.borrarRutina(LNombre.getText())) {
+            this.maincontroller.actualizarRutinas();
+        }
     }
-
-    
 
     public void setNombre(String nombre) {
         LNombre.setText(nombre);

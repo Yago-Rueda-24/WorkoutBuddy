@@ -80,6 +80,7 @@ public class MainpageController implements Initializable {
                 AnchorPane tarjeta = loader.load();
                 TarjetaController controller = loader.getController();
                 controller.setNombre(rut.getNombre());
+                controller.setMainController(this);
                 lista.getChildren().add(tarjeta);
             }
         } catch (Exception ex) {
