@@ -3,12 +3,22 @@
  */
 
 .mainFxmlClass {
-
-}
-AnchorPane {
-    -fx-border-color: black;  /* Color del borde */
+    -fx-border-color: #223971 ;  /* Color del borde */
     -fx-border-width: 5px;    /* Ancho del borde */
     -fx-border-radius: 10px;  /* Radio del borde (bordes redondeados) */
-    -fx-padding: 10px;        /* Espacio interno alrededor de los elementos */
-    -fx-background-color: #f0f0f0;  /* Color de fondo del AnchorPane */
+    -fx-background-color: #f0f0f0;
 }
+
+.pane{
+    -fx-background-color: #223971;
+    -fx-background-radius: 0px 0px 10px 0px;
+    -fx-border-radius: 0px 0px 10px 0px; /* Necesario para aplicar la curva */
+    -fx-border-width: 5px;
+    -fx-border-color: #223971;
+}
+.title{
+    -fx-font-size: 20px; /* Tamaño de la fuente */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-text-fill: white; /* Color del texto en blanco */
+}
+

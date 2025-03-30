@@ -23,8 +23,6 @@ public class TarjetaController implements Initializable {
     private RutinaServicios service;
 
     @FXML
-    private Label LName;
-    @FXML
     private Button BTNInfo;
     @FXML
     private Button BTNBorrar;
@@ -44,9 +42,6 @@ public class TarjetaController implements Initializable {
         this.maincontroller = controller;
     }
 
-    @FXML
-    private void muestraRutina(ActionEvent event) {
-    }
 
     @FXML
     private void borraTarjeta(ActionEvent event) {
