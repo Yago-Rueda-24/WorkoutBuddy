@@ -7,12 +7,13 @@
     -fx-border-width: 5px;    /* Ancho del borde */
     -fx-border-radius: 10px;  /* Radio del borde (bordes redondeados) */
     -fx-background-color: #f0f0f0;
+    
 }
 
 .pane{
     -fx-background-color: #223971;
-    -fx-background-radius: 0px 0px 10px 0px;
-    -fx-border-radius: 0px 0px 10px 0px; /* Necesario para aplicar la curva */
+    -fx-background-radius: 10px 0px 10px 0px;
+    -fx-border-radius: 10px 0px 10px 0px; /* Necesario para aplicar la curva */
     -fx-border-width: 5px;
     -fx-border-color: #223971;
 }
@@ -20,5 +21,14 @@
     -fx-font-size: 20px; /* Tamaño de la fuente */
     -fx-font-weight: bold; /* Texto en negrita */
     -fx-text-fill: white; /* Color del texto en blanco */
+}
+.button{
+    -fx-text-fill: white; /* Color del texto */
+    -fx-background-color: #223971; /* Color de fondo */
+    -fx-border-radius: 20px; /* Bordes redondeados */
+    -fx-background-radius: 20px; /* Asegura que el fondo también sea redondeado */
+    -fx-border-color: rgb(28,28,28); /* Color del borde */
+    -fx-border-width: 2px; /* Ancho del borde */
+    -fx-font-size: 14px; /* Tamaño de la letra */
 }
 

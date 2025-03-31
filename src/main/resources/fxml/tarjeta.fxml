@@ -12,9 +12,9 @@
     </stylesheets>
 
     <children>
-        <Button fx:id="BTNInfo" layoutX="86.0" layoutY="126.0" text="Button" />
-        <Button fx:id="BTNBorrar" layoutX="14.0" layoutY="126.0" onAction="#borraTarjeta" text="Button" />
-      <Pane prefHeight="48.0" prefWidth="200.0" styleClass="pane" stylesheets="@../styles/tarjeta.css">
+        <Button fx:id="BTNInfo" layoutX="129.0" layoutY="118.0" stylesheets="@../styles/tarjeta.css" text="Información" />
+        <Button fx:id="BTNBorrar" layoutX="14.0" layoutY="118.0" onAction="#borraTarjeta" stylesheets="@../styles/tarjeta.css" text="Eliminar" />
+      <Pane prefHeight="48.0" prefWidth="235.0" styleClass="pane" stylesheets="@../styles/tarjeta.css">
          <children>
       
                           <!-- Etiquetas y botones -->
