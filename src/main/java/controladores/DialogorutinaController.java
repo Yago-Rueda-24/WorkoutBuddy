@@ -4,8 +4,11 @@
  */
 package controladores;
 
+import Excepciones.InsertException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +41,7 @@ public class DialogorutinaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         service = new RutinaServicios();
-        
+
     }
 
     public void setMainController(MainpageController controller) {
@@ -53,12 +56,13 @@ public class DialogorutinaController implements Initializable {
 
     @FXML
     private void anadirRutina(ActionEvent event) {
-        if (service.crearRutina(TFNombre.getText())) {
+        try {
+            service.crearRutina(TFNombre.getText());
             maincontroller.actualizarRutinas();
             Stage stage = (Stage) BTNCrear.getScene().getWindow();
             stage.close();
-        } else {
-            System.out.println("Ya existe una rutina con ese nombre");
+        } catch (InsertException ex) {
+            System.err.println(ex.getMessage());
         }
 
     }

@@ -1,5 +1,6 @@
 package servicios;
 
+import Excepciones.InsertException;
 import entidades.Rutina;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,22 @@ public class RutinaServicios {
 
     }
 
-    public boolean crearRutina(String nombre) {
+    public boolean crearRutina(String nombre) throws InsertException {
         String sql = "INSERT into rutina (nombre) values (?)";
         String sqlcount = "SELECT COUNT(*) FROM rutina WHERE nombre == ?";
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new InsertException("Debes introducir un nombre para la rutina");
+        }
+        if(nombre.length()>25){
+            throw new InsertException("No puedes introducir más de 20 caracteres para el nombre");
+        }
         int coincidencias = Database.getInstance().contarFilas(sqlcount, nombre);
         if (coincidencias == 0) {
             Database.getInstance().insertData(sql, nombre);
             return true;
         } else {
-            return false;
+            throw new InsertException("Ya existe una rutina con ese nombre");
         }
 
     }
