@@ -1,5 +1,6 @@
 package utiles;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,6 +25,7 @@ public class Database {
     private static final String SCHEMA = "src/main/resources/com/yagorueda/workoutbuddy/schema.sql";
     private String driver;
     private String url;
+    private final String dbname = "DemoDB.db";
 
     private Database() {
         Properties prop = new Properties();
@@ -57,7 +59,14 @@ public class Database {
     }
 
     public void createDatabase() {
-        executeScript(SCHEMA);
+        if (!databaseExists()) {
+            executeScript(SCHEMA);
+        }
+    }
+
+    public boolean databaseExists() {
+        File dbFile = new File(dbname);
+        return dbFile.exists();
     }
 
     public void executeScript(String fileName) {
@@ -124,7 +133,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            
+
         }
     }
 
@@ -156,7 +165,7 @@ public class Database {
             QueryRunner runner = new QueryRunner();
             return runner.query(conn, sql, beanListHandler, params);
         } catch (SQLException e) {
-            throw new Exception();
+            throw new Exception(e);
         } finally {
             DbUtils.closeQuietly(conn);
         }

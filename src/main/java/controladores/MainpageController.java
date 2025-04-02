@@ -31,9 +31,9 @@ import servicios.RutinaServicios;
  * @author yago
  */
 public class MainpageController implements Initializable {
-    
+
     private RutinaServicios service;
-    
+
     private GridPane grid;
     @FXML
     private MenuItem MNRutina;
@@ -46,32 +46,12 @@ public class MainpageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.service = new RutinaServicios();
-        prueba();
+        actualizarRutinas();
     }
-    
-    public void prueba() {
-        try {
-            int i;
-            for (i = 0; i <= 1; i++) {
-                // Cargar la tarjeta
-                // Obtener el controlador de la tarjeta
-                // Añadir la tarjeta al contenedor
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tarjeta.fxml"));
-                AnchorPane tarjeta = loader.load();
-                
-                lista.getChildren().add(tarjeta);
-                
-            }
 
-            // Cargar el FXML de la tarjeta
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
     public void actualizarRutinas() {
-        
+
         try {
             ArrayList<Rutina> rutinas = service.recuperaRutinas();
             lista.getChildren().clear();
@@ -87,26 +67,26 @@ public class MainpageController implements Initializable {
             Logger.getLogger(MainpageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void abreDialogo(ActionEvent event) {
         try {
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dialogorutina.fxml"));
             AnchorPane dialogo = loader.load();
-            
+
             DialogorutinaController controller = loader.getController();
             controller.setMainController(this);
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Añadir Registro");
             dialogStage.setScene(new Scene(dialogo));
-            
+
             dialogStage.showAndWait();
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
 }
