@@ -46,7 +46,7 @@ public class TarjetaController implements Initializable {
     @FXML
     private void borraTarjeta(ActionEvent event) {
         if (service.borrarRutina(LNombre.getText())) {
-            this.maincontroller.actualizarRutinas();
+            this.maincontroller.actualizarRutinas(null);
         }
     }
 

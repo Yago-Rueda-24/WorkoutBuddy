@@ -58,7 +58,7 @@ public class DialogorutinaController implements Initializable {
     private void anadirRutina(ActionEvent event) {
         try {
             service.crearRutina(TFNombre.getText());
-            maincontroller.actualizarRutinas();
+            maincontroller.actualizarRutinas(null);
             Stage stage = (Stage) BTNCrear.getScene().getWindow();
             stage.close();
         } catch (InsertException ex) {

@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -39,6 +41,8 @@ public class MainpageController implements Initializable {
     private MenuItem MNRutina;
     @FXML
     private VBox lista;
+    @FXML
+    private TextField TFFiltrar;
 
     /**
      * Initializes the controller class.
@@ -46,14 +50,14 @@ public class MainpageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.service = new RutinaServicios();
-        actualizarRutinas();
+        actualizarRutinas(null);
     }
 
 
-    public void actualizarRutinas() {
+    public void actualizarRutinas(String nombreRutina) {
 
         try {
-            ArrayList<Rutina> rutinas = service.recuperaRutinas();
+            ArrayList<Rutina> rutinas = service.recuperaRutinas(nombreRutina);
             lista.getChildren().clear();
             for (Rutina rut : rutinas) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tarjeta.fxml"));
@@ -87,6 +91,12 @@ public class MainpageController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    private void filtrar(KeyEvent event) {
+        actualizarRutinas(this.TFFiltrar.getText());
+        
     }
 
 }

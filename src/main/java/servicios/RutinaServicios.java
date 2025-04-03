@@ -8,10 +8,18 @@ import utiles.Database;
 
 public class RutinaServicios {
 
-    public ArrayList<Rutina> recuperaRutinas() throws Exception {
-        String sql = "SELECT * from rutina";
-        List<Rutina> auxlist = Database.getInstance().executeQueryPojo(Rutina.class, sql);
-        return new ArrayList<>(auxlist);
+    public ArrayList<Rutina> recuperaRutinas(String nombreRutina) throws Exception {
+
+        if (nombreRutina == null || nombreRutina.isEmpty()) {
+            String sql = "SELECT * from rutina";
+            List<Rutina> auxlist = Database.getInstance().executeQueryPojo(Rutina.class, sql);
+            return new ArrayList<>(auxlist);
+        } else {
+            String sql = "SELECT * from rutina where rutina.nombre LIKE ?";
+            List<Rutina> auxlist = Database.getInstance().executeQueryPojo(Rutina.class, sql, nombreRutina + "%");
+            return new ArrayList<>(auxlist);
+        }
+
     }
 
     public boolean borrarRutina(String nombre) {
@@ -34,7 +42,7 @@ public class RutinaServicios {
         if (nombre.isEmpty() || nombre == null) {
             throw new InsertException("Debes introducir un nombre para la rutina");
         }
-        if(nombre.length()>25){
+        if (nombre.length() > 25) {
             throw new InsertException("No puedes introducir más de 20 caracteres para el nombre");
         }
         int coincidencias = Database.getInstance().contarFilas(sqlcount, nombre);
