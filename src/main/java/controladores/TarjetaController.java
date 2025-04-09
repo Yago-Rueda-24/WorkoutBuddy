@@ -54,4 +54,8 @@ public class TarjetaController implements Initializable {
         LNombre.setText(nombre);
     }
 
+    @FXML
+    private void AbrirRutina(ActionEvent event) {
+    }
+
 }
