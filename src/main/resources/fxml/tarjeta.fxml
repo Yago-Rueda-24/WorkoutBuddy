@@ -4,22 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="164.0" prefWidth="435.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.TarjetaController">
+<AnchorPane id="AnchorPane" prefHeight="228.0" prefWidth="263.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.TarjetaController">
     <stylesheets>
-        <URL value="@/styles/tarjeta.css" />
+        <URL value="@/estilos/tarjeta.css" />
     </stylesheets>
-
-    <children>
-        <Button fx:id="BTNInfo" layoutX="129.0" layoutY="118.0" onAction="#AbrirRutina" stylesheets="@../styles/tarjeta.css" text="Información" />
-        <Button fx:id="BTNBorrar" layoutX="14.0" layoutY="118.0" onAction="#borraTarjeta" stylesheets="@../styles/tarjeta.css" text="Eliminar" />
-      <Pane prefHeight="48.0" prefWidth="235.0" styleClass="pane" stylesheets="@../styles/tarjeta.css">
-         <children>
-      
-                          <!-- Etiquetas y botones -->
-              <Label fx:id="LNombre" layoutX="13.0" layoutY="14.0" prefHeight="24.0" prefWidth="175.0" styleClass="title" text="Label" />
-         </children>
-      </Pane>
-    </children>
+   <children>
+      <Label fx:id="LRutina" layoutX="14.0" layoutY="20.0" text="Label" />
+      <Button fx:id="BtnInfo" layoutX="101.0" layoutY="166.0" mnemonicParsing="false" onAction="#abrirInfo" text="Button" />
+   </children>
 </AnchorPane>
