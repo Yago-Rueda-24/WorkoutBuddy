@@ -84,6 +84,8 @@ public class MainpageController implements Initializable {
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Añadir Registro");
             dialogStage.setScene(new Scene(dialogo));
+            dialogStage.setResizable(false);
+            dialogStage.setWidth(300);
 
             dialogStage.showAndWait();
 

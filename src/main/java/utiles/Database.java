@@ -29,9 +29,9 @@ public class Database {
 
     private Database() {
         Properties prop = new Properties();
-        try (FileInputStream fs = new FileInputStream(APP_PROPERTIES)) {
-            prop.load(fs);
-        } catch (IOException e) {
+        try{
+             prop.load(Database.class.getClassLoader().getResourceAsStream("com/yagorueda/workoutbuddy/application.properties"));
+        } catch (NullPointerException| IOException e) {
             throw new RuntimeException("error al cargar el archivo");
         }
         driver = prop.getProperty("datasource.driver");
@@ -71,11 +71,21 @@ public class Database {
 
     public void executeScript(String fileName) {
         List<String> lines;
-        try {
-            lines = Files.readAllLines(Paths.get(fileName));
+        try (var is = Database.class.getClassLoader().getResourceAsStream("com/yagorueda/workoutbuddy/schema.sql")) {
+            if (is == null) {
+                throw new RuntimeException("No se encontró el archivo schema.sql en el classpath");
+            }
+            lines = new ArrayList<>();
+            try (var reader = new java.io.BufferedReader(new java.io.InputStreamReader(is))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al leer schema.sql desde recursos", e);
         }
+
         // separa las sentencias sql en dos listas, una para drop y otra para el resto
         // pues se ejecutaran de forma diferente
         List<String> batchUpdate = new ArrayList<>();

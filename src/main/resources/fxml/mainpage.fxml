@@ -41,7 +41,7 @@
       </MenuBar>
       <TabPane layoutY="28.0" prefHeight="531.0" prefWidth="726.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Rutinas">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <left>
