@@ -1,10 +1,9 @@
 package com.YagoRueda.WorkoutBuddy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Entity
 public class RoutineEntity {
@@ -15,4 +14,11 @@ public class RoutineEntity {
 
     @NotBlank(message = "El nombre es obligatorio")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    @OneToMany(mappedBy = "routine",cascade = CascadeType.ALL)
+    private List<ExcerciseEntity> exercises;
 }

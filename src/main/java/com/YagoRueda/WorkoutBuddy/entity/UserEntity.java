@@ -1,10 +1,9 @@
 package com.YagoRueda.WorkoutBuddy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Entity
 public class UserEntity {
@@ -17,6 +16,9 @@ public class UserEntity {
     private String username;
     @NotBlank(message = "La password es obligatoria")
     private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<RoutineEntity> routines;
 
     public String getPassword() {
         return password;

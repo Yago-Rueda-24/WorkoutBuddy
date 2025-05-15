@@ -13,6 +13,10 @@ public class ExcerciseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne()
+    @JoinColumn(name = "routine_id")
+    private RoutineEntity routine;
+
     @NotBlank(message = "El nombre es obligatorio")
     private String name;
     @Min(value = 1, message = "El numero de repeticiones debe ser positivo")
