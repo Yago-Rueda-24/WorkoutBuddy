@@ -9,18 +9,22 @@
     <div class="container">
         <h1>Iniciar Sesion</h1>
         <p>Ingresa tu correo electronico y password para acceder a tu cuenta.</p>
-        <label for="username">
-            <p class="etiqueta">Nombre de usuario</p>
-            <input type="text" id="username" placeholder="Ingresa el nombre de usuario" class="entrada">
-        </label>
-        <label for="password">
-            <p class="etiqueta">Password</p>
-            <input type="password" id="password" placeholder="Introduce tu contraseña" class="entrada">
-        </label>
-        <button type="submit" class="entrada" id="boton">Iniciar Sesion</button>
-        <a href="">¿Olvidaste tu password?</a>
+        <form id="login-form"  >
+            <label for="username">
+                <p class="etiqueta">Nombre de usuario</p>
+                <input type="text" id="username" placeholder="Ingresa el nombre de usuario" class="entrada">
+            </label>
+            <label for="password">
+                <p class="etiqueta">Password</p>
+                <input type="password" id="password" placeholder="Introduce tu password" class="entrada">
+            </label>
+            <button type="submit" class="entrada" id="boton">Iniciar Sesion</button>
+        </form>
+        <p id="messager-error"></p>
+        <a href="">Olvidaste tu password</a>
         <a href="">Crear Cuenta</a>
     </div>
 </body>
 
+<script src="/app/login.js"></script>
 </html>
