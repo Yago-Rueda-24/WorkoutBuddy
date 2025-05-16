@@ -26,7 +26,7 @@ public class LoginController {
         return service.findAll();
     }
 
-    @GetMapping("/trylog")
+    @PostMapping("/trylog")
     public boolean logUser(@RequestBody UserEntity user) {
         return service.login(user);
     }
