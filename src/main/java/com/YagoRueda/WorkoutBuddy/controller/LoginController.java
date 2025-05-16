@@ -3,10 +3,8 @@ package com.YagoRueda.WorkoutBuddy.controller;
 
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +20,17 @@ public class LoginController {
 
 
     @GetMapping("/show")
-    public List<UserEntity> showUsers(){
+    public List<UserEntity> showUsers() {
         return service.findAll();
     }
 
     @GetMapping("/trylog")
-    public  boolean logUser(@RequestBody UserEntity user){
+    public boolean logUser(@RequestBody UserEntity user) {
         return service.login(user);
+    }
+
+    @PostMapping("/signup")
+    public boolean signUp(@Valid @RequestBody UserEntity user) {
+        return service.signUp(user);
     }
 }

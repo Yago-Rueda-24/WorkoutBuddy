@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final  UserRepository repository;
+    private final UserRepository repository;
 
     public UserService(UserRepository repository) {
         this.repository = repository;
@@ -27,6 +27,16 @@ public class UserService {
             return false;
         }
         return foundUser.getPassword().equals(user.getPassword());
+    }
+
+    public boolean signUp(UserEntity user) {
+        boolean exists = repository.existsByUsername(user.getUsername());
+        if (!exists) {
+            repository.save(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
