@@ -6,6 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background: linear-gradient(to bottom, #b8e7b9, #ffffff);
 }
 
 .container {
@@ -28,7 +29,7 @@ h1 {
 
 #boton {
     text-align: center;
-    background-color: #000000;
+    background-color: #4CAF50;
     color: #ffffff;
     border: none;
     font-size: 14px;
@@ -38,7 +39,8 @@ h1 {
 }
 
 #boton:hover {
-    background-color: #333333;
+    background-color: #3e8e41;
+    border-color: #3e8e41;
 }
 
 .etiqueta {
