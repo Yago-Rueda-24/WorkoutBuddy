@@ -5,10 +5,13 @@ import com.YagoRueda.WorkoutBuddy.DTO.SignupDTO;
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/login")
@@ -28,8 +31,13 @@ public class LoginController {
     }
 
     @PostMapping("/trylog")
-    public boolean logUser(@RequestBody UserEntity user) {
-        return service.login(user);
+    public ResponseEntity<?> logUser(@RequestBody UserEntity user) {
+
+        if(service.login(user)){
+            return ResponseEntity.ok().body(Map.of("message","Inicio de sesión exitoso"));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Usuario o contraseña incorrectos"));
+        }
     }
 
     @PostMapping("/signup")
