@@ -30,20 +30,20 @@ public class UserService {
         return foundUser.getPassword().equals(user.getPassword());
     }
 
-    public boolean signUp(SignupDTO signup) {
+    public int signUp(SignupDTO signup) {
         boolean exists = repository.existsByUsername(signup.getUsername());
         boolean correct_password = signup.getPasswordrepeat().equals(signup.getPassword());
         if(!correct_password){
-            return false;
+            return 1;
         }
         if (exists) {
-            return false;
+            return 2;
         }
         UserEntity user = new UserEntity();
         user.setUsername(signup.getUsername());
         user.setPassword(signup.getPassword());
         repository.save(user);
-        return true;
+        return 0;
     }
 
 
