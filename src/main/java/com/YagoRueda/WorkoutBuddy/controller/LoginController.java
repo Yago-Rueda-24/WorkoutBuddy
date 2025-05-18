@@ -1,6 +1,7 @@
 package com.YagoRueda.WorkoutBuddy.controller;
 
 
+import com.YagoRueda.WorkoutBuddy.DTO.SignupDTO;
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import jakarta.validation.Valid;
@@ -32,7 +33,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public boolean signUp(@Valid @RequestBody UserEntity user) {
-        return service.signUp(user);
+    public boolean signUp(@Valid @RequestBody SignupDTO signup) {
+        return service.signUp(signup);
     }
 }
