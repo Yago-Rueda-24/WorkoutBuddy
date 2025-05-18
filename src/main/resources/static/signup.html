@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/estilologin.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Crear cuenta</h1>
+        <p>Ingresa un nombre de usuario y una contraseña.</p>
+        <form id="signup-form"  >
+            <label for="username">
+                <p class="etiqueta">Nombre de usuario</p>
+                <input type="text" id="username" placeholder="Ingresa el nombre de usuario" class="entrada">
+            </label>
+            <label for="password">
+                <p class="etiqueta">Password</p>
+                <input type="password" id="password" placeholder="Introduce la password" class="entrada">
+            </label>
+            <label for="passwordrepeat">
+                <p class="etiqueta">Password Repetidad</p>
+                <input type="password" id="passwordrepeat" placeholder="Introduce la password repetida" class="entrada">
+            </label>
+            <button type="submit" class="entrada" id="boton">Iniciar Sesion</button>
+        </form>
+        <p id="messager-error"></p>
+    </div>
+</body>
+
+<script src="/app/signup.js"></script>
+</html>
