@@ -10,4 +10,6 @@ public interface RoutineRepository extends JpaRepository<RoutineEntity,Long> {
     RoutineEntity findById(long id);
 
     List<RoutineEntity> findByUserUsername(String name);
+
+    boolean existsByName(String name);
 }

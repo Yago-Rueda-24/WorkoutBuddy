@@ -50,12 +50,16 @@ public class RoutineController {
 
     @PostMapping("/add/{username}")
     public ResponseEntity<?> addRoutine(@PathVariable String username, @RequestBody RoutineDTO dto){
-        boolean success = service.addRoutine(username,dto);
-        if(success){
-            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mesagge","Creacion correcta"));
-
-        }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mesagge","Error en la corrección"));
+        int option = service.addRoutine(username,dto);
+        switch (option){
+            case 0:
+                return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mesagge","Creacion correcta"));
+            case 1:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mesagge","La rutina ya existe"));
+            case 2:
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mesagge","Error en el servidor"));
+            default:
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mesagge","Error desconocido"));
         }
 
     }
