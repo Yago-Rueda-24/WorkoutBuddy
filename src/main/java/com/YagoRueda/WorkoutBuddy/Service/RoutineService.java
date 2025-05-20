@@ -46,4 +46,16 @@ public class RoutineService {
         }
 
     }
+
+    public int deleteRoutine(String username,RoutineDTO dto){
+        if(!routineRepository.existsByName(dto.getName())){
+            //La rutina no existe
+            return 1;
+        }
+        RoutineEntity routineDelete = routineRepository.findByName(dto.getName());
+        routineRepository.delete(routineDelete);
+        //Operación correcta
+        return 0;
+
+    }
 }
