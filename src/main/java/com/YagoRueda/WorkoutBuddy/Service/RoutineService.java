@@ -1,5 +1,6 @@
 package com.YagoRueda.WorkoutBuddy.Service;
 
+import com.YagoRueda.WorkoutBuddy.DTO.ModifyRoutineDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.RoutineDTO;
 import com.YagoRueda.WorkoutBuddy.entity.RoutineEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
@@ -45,6 +46,20 @@ public class RoutineService {
             return 2;
         }
 
+    }
+
+    public int modifyRoutine(String username, ModifyRoutineDTO dto){
+        RoutineDTO oldRoutine = dto.getOldRoutine();
+        RoutineDTO newRoutine = dto.getNewRoutine();
+        if(!routineRepository.existsByName(oldRoutine.getName())){
+            //La rutina no existe
+            return 1;
+        }
+        RoutineEntity routine = routineRepository.findByName(oldRoutine.getName());
+        routine.setName(newRoutine.getName());
+        routine.setExercises(newRoutine.getExercises());
+        routineRepository.save(routine);
+        return 0;
     }
 
     public int deleteRoutine(String username,RoutineDTO dto){

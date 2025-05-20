@@ -1,5 +1,6 @@
 package com.YagoRueda.WorkoutBuddy.controller;
 
+import com.YagoRueda.WorkoutBuddy.DTO.ModifyRoutineDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.RoutineDTO;
 import com.YagoRueda.WorkoutBuddy.Service.RoutineService;
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
@@ -63,6 +64,26 @@ public class RoutineController {
         }
 
     }
+
+    @PutMapping("/modify/{username}")
+    public ResponseEntity<?> modifyRoutine(@PathVariable String username,String oldDTO, @RequestBody ModifyRoutineDTO dto) {
+        if (username == null || username.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario no puede estar vacío."));
+        }
+        if (dto == null) {
+            return ResponseEntity.badRequest().body(Map.of("message", "La rutina no existe"));
+        }
+
+        int option = service.modifyRoutine(username, dto);
+        switch (option) {
+            case 0:
+                return ResponseEntity.status(HttpStatus.OK).body(Map.of("mesagge", "Modificado correcto"));
+            default:
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mesagge", "Error desconocido"));
+        }
+
+    }
+
 
     @DeleteMapping("/delete/{username}")
     public ResponseEntity<?> deleteRoutine(@PathVariable String username, @RequestBody RoutineDTO dto) {
