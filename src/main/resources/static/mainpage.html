@@ -1,15 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Ejercicios</title>
+    <link rel="stylesheet" href="css/estilomainpage.css">
 </head>
 
 <body>
-    <p>Estoy logeado</p>
+    <!-- Header con usuario logueado -->
+    <header>
+        <div class="user-info">Logueado user</div>
+    </header>
 
+    <!-- Contenedor principal con aside y contenido -->
+    <div class="main-container">
+        <!-- Aside a la izquierda -->
+        <aside>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Buscar...">
+            </div>
+            <!-- Puedes añadir más elementos al aside aquí -->
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Encabezado con título y botón añadir -->
+            <div class="content-header">
+                <h1 class="content-title">Ejercicios</h1>
+                <button id="btnAdd" class="btn btn-add">Añadir</button>
+            </div>
+
+            <!-- Lista de componentes -->
+            <ul class="component-list">
+                <li class="component-item">
+                    <span class="component-name">Sentadillas</span>
+                    <div class="component-actions">
+                        <button class="btn btn-edit">Editar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </li>
+                <li class="component-item">
+                    <span class="component-name">Press de banca</span>
+                    <div class="component-actions">
+                        <button class="btn btn-edit">Editar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </li>
+                <li class="component-item">
+                    <span class="component-name">Peso muerto</span>
+                    <div class="component-actions">
+                        <button class="btn btn-edit">Editar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </li>
+                <li class="component-item">
+                    <span class="component-name">Dominadas</span>
+                    <div class="component-actions">
+                        <button class="btn btn-edit">Editar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </li>
+                <li class="component-item">
+                    <span class="component-name">Fondos</span>
+                    <div class="component-actions">
+                        <button class="btn btn-edit">Editar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </body>
+
+<script src="/app/routines.js"></script>
 
 </html>
