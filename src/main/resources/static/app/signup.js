@@ -1,3 +1,4 @@
+
 async function signup() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
@@ -18,6 +19,7 @@ async function signup() {
 
     if (response.ok) {
       const data = await response.json();
+      sessionStorage.setItem("user", username);
       console.log("Respuesta de éxito:", data.message); 
       window.location.href = "/mainpage.html";
     } else if (response.status === 409) {

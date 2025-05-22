@@ -16,6 +16,7 @@ async function checkLoginStatus() {
 
     if (response.ok) {
       const data = await response.json();
+      sessionStorage.setItem("user", username);
       console.log("Respuesta de éxito:", data.message); 
       window.location.href = "/mainpage.html";
     } else if (response.status === 401) {
