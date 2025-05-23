@@ -2,8 +2,10 @@ package com.YagoRueda.WorkoutBuddy.Service;
 
 import com.YagoRueda.WorkoutBuddy.DTO.ModifyRoutineDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.RoutineDTO;
+import com.YagoRueda.WorkoutBuddy.entity.ExerciseEntity;
 import com.YagoRueda.WorkoutBuddy.entity.RoutineEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
+import com.YagoRueda.WorkoutBuddy.repository.ExerciseRepository;
 import com.YagoRueda.WorkoutBuddy.repository.RoutineRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,16 +17,23 @@ public class RoutineService {
 
     private final RoutineRepository routineRepository;
     private final UserRepository userRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    public RoutineService(RoutineRepository repository, UserRepository userRepository) {
+    public RoutineService(RoutineRepository repository, UserRepository userRepository, ExerciseRepository exerciseRepository) {
         this.routineRepository = repository;
         this.userRepository = userRepository;
+        this.exerciseRepository = exerciseRepository;
     }
 
     public List<RoutineEntity> obtainRoutinesByUsername(String username) {
         return routineRepository.findByUserUsername(username);
 
     }
+
+    public RoutineEntity obtainExerciseByRoutine(String routine){
+        return routineRepository.findByName(routine);
+    }
+
 
     public int addRoutine(String username, RoutineDTO dto) {
 

@@ -24,7 +24,7 @@ public class RoutineController {
         this.service = service;
     }
 
-    @GetMapping("/show/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<?> showRoutine(@PathVariable String username) {
         if (username == null || username.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario no puede estar vacío."));
@@ -47,6 +47,23 @@ public class RoutineController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Error al buscar en la lista"));
         }
 
+    }
+
+    @GetMapping("/exercise/{routinename}")
+    public ResponseEntity<?> showExercise(@PathVariable String routinename){
+        if (routinename == null || routinename.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "El nombre de rutina no puede estar vacío."));
+        }
+        RoutineEntity entity = service.obtainExerciseByRoutine(routinename);
+        if(entity != null){
+            RoutineDTO dto = new RoutineDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setExercises(entity.getExercises());
+            return ResponseEntity.ok().body(dto);
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Error al buscar la rutina"));
+        }
     }
 
     @PostMapping("/add/{username}")
