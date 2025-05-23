@@ -1,7 +1,6 @@
 package com.YagoRueda.WorkoutBuddy.DTO;
 
-import com.YagoRueda.WorkoutBuddy.entity.ExcerciseEntity;
-import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
+import com.YagoRueda.WorkoutBuddy.entity.ExerciseEntity;
 
 import java.util.List;
 
@@ -9,13 +8,13 @@ public class RoutineDTO {
 
     private long id;
     private String name;
-    private List<ExcerciseEntity> exercises;
+    private List<ExerciseEntity> exercises;
 
-    public List<ExcerciseEntity> getExercises() {
+    public List<ExerciseEntity> getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<ExcerciseEntity> exercises) {
+    public void setExercises(List<ExerciseEntity> exercises) {
         this.exercises = exercises;
     }
 

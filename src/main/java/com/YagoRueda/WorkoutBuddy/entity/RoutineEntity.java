@@ -20,7 +20,7 @@ public class RoutineEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
-    private List<ExcerciseEntity> exercises;
+    private List<ExerciseEntity> exercises;
 
 
     public long getId() {
@@ -44,11 +44,11 @@ public class RoutineEntity {
         this.user = user;
     }
 
-    public List<ExcerciseEntity> getExercises() {
+    public List<ExerciseEntity> getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<ExcerciseEntity> exercises) {
+    public void setExercises(List<ExerciseEntity> exercises) {
         this.exercises = exercises;
     }
 }
