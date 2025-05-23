@@ -1,8 +1,8 @@
+const username = sessionStorage.getItem("user");
 
 document.getElementById("btnAdd").addEventListener("click", function () {
     // Aquí puedes agregar la lógica para añadir un nuevo ejercicio
     // Por ejemplo, mostrar un formulario modal o redirigir a otra página
-    const username = sessionStorage.getItem("user");
     console.log(username);
 });
 
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lista = document.querySelector(".component-list");
 
     // Petición a la API
-    fetch("/api/ejercicios")
+    fetch("/routine/show/"+username)
         .then(response => response.json())
         .then(data => {
             
