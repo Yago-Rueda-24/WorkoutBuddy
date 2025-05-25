@@ -30,8 +30,8 @@ public class RoutineService {
 
     }
 
-    public RoutineEntity obtainExerciseByRoutine(String routine){
-        return routineRepository.findByName(routine);
+    public RoutineEntity obtainExerciseByRoutine(int id ){
+        return routineRepository.findById(id);
     }
 
 

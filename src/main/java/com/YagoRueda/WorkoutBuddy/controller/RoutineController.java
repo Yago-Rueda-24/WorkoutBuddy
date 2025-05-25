@@ -49,20 +49,25 @@ public class RoutineController {
 
     }
 
-    @GetMapping("/exercise/{routinename}")
-    public ResponseEntity<?> showExercise(@PathVariable String routinename){
-        if (routinename == null || routinename.trim().isEmpty()) {
+    @GetMapping("/exercise/{routineid}")
+    public ResponseEntity<?> showExercise(@PathVariable String routineid) {
+        if (routineid == null || routineid.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "El nombre de rutina no puede estar vacío."));
         }
-        RoutineEntity entity = service.obtainExerciseByRoutine(routinename);
-        if(entity != null){
-            RoutineDTO dto = new RoutineDTO();
-            dto.setId(entity.getId());
-            dto.setName(entity.getName());
-            dto.setExercises(entity.getExercises());
-            return ResponseEntity.ok().body(dto);
-        }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Error al buscar la rutina"));
+        try {
+            int id = Integer.parseInt(routineid);
+            RoutineEntity entity = service.obtainExerciseByRoutine(id);
+            if (entity != null) {
+                RoutineDTO dto = new RoutineDTO();
+                dto.setId(entity.getId());
+                dto.setName(entity.getName());
+                dto.setExercises(entity.getExercises());
+                return ResponseEntity.ok().body(dto);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Error al buscar la rutina"));
+            }
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "El id debe ser un número"));
         }
     }
 
@@ -83,7 +88,7 @@ public class RoutineController {
     }
 
     @PutMapping("/modify/{username}")
-    public ResponseEntity<?> modifyRoutine(@PathVariable String username,String oldDTO, @RequestBody ModifyRoutineDTO dto) {
+    public ResponseEntity<?> modifyRoutine(@PathVariable String username, String oldDTO, @RequestBody ModifyRoutineDTO dto) {
         if (username == null || username.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario no puede estar vacío."));
         }

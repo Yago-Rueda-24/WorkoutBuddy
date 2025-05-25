@@ -39,7 +39,7 @@ function retriveRoutine() {
 
                 const infoBtn = li.querySelector(".btn-edit");
                 infoBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("routine", ejercicio.name);
+                    sessionStorage.setItem("routine", ejercicio.id);
                     // Redirigir con parámetro en la URL
                     window.location.href = "inforoutine.html";
                 });
