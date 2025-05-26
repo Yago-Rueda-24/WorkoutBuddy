@@ -32,12 +32,13 @@ function retriveRoutine() {
                 li.innerHTML = `
                     <span class="component-name">${ejercicio.name}</span>
                     <div class="component-actions">
-                        <button class="btn btn-edit" data-id="${ejercicio.id}">Información</button>
+                        <button class="btn btn-info">Ver</button>
+                        <button class="btn btn-edit" data-id="${ejercicio.id}">Editar</button>
                         <button class="btn btn-delete" data-id="${ejercicio.id}">Eliminar</button>
                     </div>
                 `;
 
-                const infoBtn = li.querySelector(".btn-edit");
+                const infoBtn = li.querySelector(".btn-info");
                 infoBtn.addEventListener("click", () => {
                     sessionStorage.setItem("routine", ejercicio.id);
                     // Redirigir con parámetro en la URL
