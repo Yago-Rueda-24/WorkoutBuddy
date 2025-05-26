@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ejercicios</title>
+    <link rel="stylesheet" href="css/estilomainpage.css">
+</head>
+
+<body>
+    <!-- Header con usuario logueado -->
+    <header>
+        <div class="user-info">Logueado user</div>
+    </header>
+
+    <!-- Contenedor principal con aside y contenido -->
+    <div class="main-container">
+
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Encabezado con título y botón añadir -->
+            <div class="content-header">
+                <h1 class="content-title">Ejercicios</h1>
+                <button id="btnAdd" class="btn btn-add">Añadir</button>
+            </div>
+
+            <!-- Lista de componentes -->
+            <ul class="component-list">
+                <li class="component-item">
+                    <input type="text" class="component-name" value="${ejercicio.name}">
+                    <input type="number" class="component-reps" value="${ejercicio.reps}" placeholder="Reps">
+                    <input type="number" class="component-sets" value="${ejercicio.sets}" placeholder="Sets">
+                    <div class="component-actions">
+                        <button class="btn btn-delete" data-id="${ejercicio.id}">Eliminar</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script src="/app/modifyroutine.js"></script>
+
+</html>

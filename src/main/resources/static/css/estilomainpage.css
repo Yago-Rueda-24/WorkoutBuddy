@@ -104,7 +104,11 @@
 
   .component-name {
       font-weight: 500;
-      padding: 15px 20px;
+    padding: 15px 10px;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
       display: flex;
       align-items: center;
       flex: 1;
