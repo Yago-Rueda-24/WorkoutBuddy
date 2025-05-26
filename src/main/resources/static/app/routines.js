@@ -14,6 +14,25 @@ function addExercise() {
 
 }
 
+function deleteExercise(id) {
+    // Petición a la API para eliminar el ejercicio
+    fetch("/routine/delete/" + id, {
+        method: "DELETE"
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Ejercicio eliminado correctamente");
+                retriveRoutine(); 
+            } else {
+                console.error("Error al eliminar el ejercicio");
+            }
+        })
+        .catch(error => {
+            console.error("Error en la petición:", error);
+        });
+        
+}
+
 function retriveRoutine() {
     const lista = document.querySelector(".component-list");
 
@@ -43,6 +62,12 @@ function retriveRoutine() {
                     sessionStorage.setItem("routine", ejercicio.id);
                     // Redirigir con parámetro en la URL
                     window.location.href = "inforoutine.html";
+                });
+
+                const deleteBtn = li.querySelector(".btn-delete");
+                deleteBtn.addEventListener("click", () => {
+                    // Redirigir con parámetro en la URL
+                    deleteExercise(ejercicio.id);
                 });
 
 
