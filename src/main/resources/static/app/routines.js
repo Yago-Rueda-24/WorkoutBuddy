@@ -64,6 +64,13 @@ function retriveRoutine() {
                     window.location.href = "inforoutine.html";
                 });
 
+                const editBtn = li.querySelector(".btn-edit");
+                editBtn.addEventListener("click", () => {
+                    sessionStorage.setItem("routine", ejercicio.id);
+                    // Redirigir con parámetro en la URL
+                    window.location.href = "modifyroutine.html";
+                });
+
                 const deleteBtn = li.querySelector(".btn-delete");
                 deleteBtn.addEventListener("click", () => {
                     // Redirigir con parámetro en la URL
