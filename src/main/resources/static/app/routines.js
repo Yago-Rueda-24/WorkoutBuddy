@@ -3,7 +3,8 @@ const username = sessionStorage.getItem("user");
 document.getElementById("btnAdd").addEventListener("click", function () {
     // Aquí puedes agregar la lógica para añadir un nuevo ejercicio
     // Por ejemplo, mostrar un formulario modal o redirigir a otra página
-    console.log(username);
+    sessionStorage.setItem("insert", "true");
+    window.location.href = "modifyroutine.html";
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -67,6 +68,7 @@ function retriveRoutine() {
                 const editBtn = li.querySelector(".btn-edit");
                 editBtn.addEventListener("click", () => {
                     sessionStorage.setItem("routine", ejercicio.id);
+                    sessionStorage.setItem("insert", "false");
                     // Redirigir con parámetro en la URL
                     window.location.href = "modifyroutine.html";
                 });

@@ -1,9 +1,23 @@
+
+const title = document.querySelector(".content-title");
+const lista = document.querySelector(".component-list");
+const routine = sessionStorage.getItem("routine");
 document.addEventListener("DOMContentLoaded", function () {
-    const title = document.querySelector(".content-title");
-    const lista = document.querySelector(".component-list");
-    const routine = sessionStorage.getItem("routine");
+ 
+
     console.log(routine);
     // Aquí usas el ID que corresponda. Podrías capturarlo dinámicamente desde query params si quieres hacerlo reutilizable.
+    if (sessionStorage.getItem("insert") === "true") {
+        console.log("1");
+    } else {
+        console.log("2");
+        retriveExercise(routine);
+    }
+
+
+});
+
+function retriveExercise(routine) {
     fetch("/routine/exercise/" + routine)
         .then(response => response.json())
         .then(data => {
@@ -28,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     `;
 
-                    
-                   
+
+
 
                     lista.appendChild(li);
                 });
@@ -40,4 +54,4 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Error al cargar la rutina:", error);
         });
-});
+}
