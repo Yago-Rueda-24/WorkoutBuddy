@@ -37,22 +37,23 @@ public class RoutineService {
 
     public int addRoutine(String username, RoutineDTO dto) {
 
-        if(routineRepository.existsByName(dto.getName())){
-            //La rutina ya existe
-            return 1;
-        }
+
         UserEntity user = userRepository.findByUsername(username);
         if (user != null) {
             RoutineEntity routine = new RoutineEntity();
             routine.setName(dto.getName());
             routine.setUser(user);
-            routine.setExercises(dto.getExercises());
+            List<ExerciseEntity> exercises = dto.getExercises();
+            for (ExerciseEntity ex : exercises) {
+                ex.setRoutine(routine);
+            }
+            routine.setExercises(exercises);
             routineRepository.save(routine);
             //operación correcta
             return 0;
         } else {
             //Error interno
-            return 2;
+            return 1;
         }
 
     }

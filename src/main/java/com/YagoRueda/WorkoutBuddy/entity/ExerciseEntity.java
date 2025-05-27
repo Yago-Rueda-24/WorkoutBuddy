@@ -49,4 +49,8 @@ public class ExerciseEntity {
     public void setSets(int sets) {
         this.sets = sets;
     }
+
+    public void setRoutine(RoutineEntity routine) {
+        this.routine = routine;
+    }
 }
