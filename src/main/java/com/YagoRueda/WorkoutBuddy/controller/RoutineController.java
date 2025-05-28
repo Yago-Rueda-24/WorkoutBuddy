@@ -5,6 +5,7 @@ import com.YagoRueda.WorkoutBuddy.DTO.RoutineDTO;
 import com.YagoRueda.WorkoutBuddy.Service.RoutineService;
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
 import com.YagoRueda.WorkoutBuddy.entity.RoutineEntity;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -72,7 +73,7 @@ public class RoutineController {
     }
 
     @PostMapping("/add/{username}")
-    public ResponseEntity<?> addRoutine(@PathVariable String username, @RequestBody RoutineDTO dto) {
+    public ResponseEntity<?> addRoutine(@PathVariable String username, @RequestBody @Valid RoutineDTO dto) {
         int option = service.addRoutine(username, dto);
         switch (option) {
             case 0:

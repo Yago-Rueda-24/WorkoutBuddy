@@ -1,13 +1,17 @@
 package com.YagoRueda.WorkoutBuddy.DTO;
 
 import com.YagoRueda.WorkoutBuddy.entity.ExerciseEntity;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
 public class RoutineDTO {
 
     private long id;
+    @NotBlank(message = "El nombre de la rutina no puede estar vacío")
     private String name;
+    @Valid
     private List<ExerciseEntity> exercises;
 
     public List<ExerciseEntity> getExercises() {
