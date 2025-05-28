@@ -22,19 +22,13 @@
             <!-- Encabezado con título y botón añadir -->
             <div class="content-header">
                 <h1 class="content-title">Ejercicios</h1>
+                <button id="btnSave" class="btn btn-add">Guardar Rutina</button>
                 <button id="btnAdd" class="btn btn-add">Añadir</button>
             </div>
 
             <!-- Lista de componentes -->
             <ul class="component-list">
-                <li class="component-item">
-                    <input type="text" class="component-name" value="${ejercicio.name}">
-                    <input type="number" class="component-reps" value="${ejercicio.reps}" placeholder="Reps">
-                    <input type="number" class="component-sets" value="${ejercicio.sets}" placeholder="Sets">
-                    <div class="component-actions">
-                        <button class="btn btn-delete" data-id="${ejercicio.id}">Eliminar</button>
-                    </div>
-                </li>
+
             </ul>
         </div>
     </div>
