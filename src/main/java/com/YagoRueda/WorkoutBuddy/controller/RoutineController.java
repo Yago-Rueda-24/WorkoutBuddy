@@ -80,6 +80,8 @@ public class RoutineController {
                 return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mesagge", "Creacion correcta"));
             case 1:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mesagge", "El usuario no existe"));
+            case 2:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mesagge", "La lista esta vacia"));
             default:
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mesagge", "Error desconocido"));
         }

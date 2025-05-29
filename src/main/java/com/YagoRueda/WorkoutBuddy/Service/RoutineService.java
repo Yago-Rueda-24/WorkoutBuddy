@@ -37,7 +37,9 @@ public class RoutineService {
 
     public int addRoutine(String username, RoutineDTO dto) {
 
-
+        if( dto.getExercises() == null||dto.getExercises().isEmpty()){
+         return 2;
+        }
         UserEntity user = userRepository.findByUsername(username);
         if (user != null) {
             RoutineEntity routine = new RoutineEntity();
@@ -45,7 +47,9 @@ public class RoutineService {
             routine.setUser(user);
             List<ExerciseEntity> exercises = dto.getExercises();
             for (ExerciseEntity ex : exercises) {
+
                 ex.setRoutine(routine);
+
             }
             routine.setExercises(exercises);
             routineRepository.save(routine);
