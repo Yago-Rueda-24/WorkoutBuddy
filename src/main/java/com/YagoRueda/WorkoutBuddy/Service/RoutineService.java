@@ -30,15 +30,15 @@ public class RoutineService {
 
     }
 
-    public RoutineEntity obtainExerciseByRoutine(int id ){
+    public RoutineEntity obtainExerciseByRoutine(int id) {
         return routineRepository.findById(id);
     }
 
 
     public int addRoutine(String username, RoutineDTO dto) {
 
-        if( dto.getExercises() == null||dto.getExercises().isEmpty()){
-         return 2;
+        if (dto.getExercises() == null || dto.getExercises().isEmpty()) {
+            return 2;
         }
         UserEntity user = userRepository.findByUsername(username);
         if (user != null) {
@@ -62,22 +62,25 @@ public class RoutineService {
 
     }
 
-    public int modifyRoutine(String username, ModifyRoutineDTO dto){
-        RoutineDTO oldRoutine = dto.getOldRoutine();
-        RoutineDTO newRoutine = dto.getNewRoutine();
-        if(!routineRepository.existsByName(oldRoutine.getName())){
+    public int modifyRoutine(long id, RoutineDTO dto) {
+
+        if (!routineRepository.existsById(id)) {
             //La rutina no existe
             return 1;
         }
-        RoutineEntity routine = routineRepository.findByName(oldRoutine.getName());
-        routine.setName(newRoutine.getName());
-        routine.setExercises(newRoutine.getExercises());
+        RoutineEntity routine = routineRepository.findById(id);
+        routine.setName(dto.getName());
+        List<ExerciseEntity> exercises = dto.getExercises();
+        for (ExerciseEntity ex : exercises) {
+            ex.setRoutine(routine);
+        }
+        routine.setExercises(exercises);
         routineRepository.save(routine);
         return 0;
     }
 
-    public int deleteRoutine(long id){
-        if(!routineRepository.existsById(id)){
+    public int deleteRoutine(long id) {
+        if (!routineRepository.existsById(id)) {
             //La rutina no existe
             return 1;
         }

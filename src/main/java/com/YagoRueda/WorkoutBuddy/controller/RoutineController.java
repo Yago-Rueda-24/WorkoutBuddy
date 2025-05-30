@@ -88,21 +88,28 @@ public class RoutineController {
 
     }
 
-    @PutMapping("/modify/{username}")
-    public ResponseEntity<?> modifyRoutine(@PathVariable String username, String oldDTO, @RequestBody ModifyRoutineDTO dto) {
-        if (username == null || username.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body(Map.of("message", "El nombre de usuario no puede estar vacío."));
+    @PutMapping("/modify/{routineid}")
+    public ResponseEntity<?> modifyRoutine(@PathVariable String routineid, @RequestBody @Valid RoutineDTO dto) {
+        if (routineid == null || routineid.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "El id de la rutina no puede estar vacío."));
         }
         if (dto == null) {
-            return ResponseEntity.badRequest().body(Map.of("message", "La rutina no existe"));
+            return ResponseEntity.badRequest().body(Map.of("message", "La rutina no puede ser vacia"));
         }
+        try {
+            int id = Integer.parseInt(routineid);
+            int option = service.modifyRoutine(id,dto);
+            switch (option) {
+                case 0:
+                    return ResponseEntity.ok().body(Map.of("mesagge", "Actualización correcta "));
+                case 1:
+                    return ResponseEntity.badRequest().body(Map.of("mesagge", "La rutina no existe"));
+                default:
+                    return ResponseEntity.internalServerError().body(Map.of("mesagge", "Error interno en el servidor"));
+            }
 
-        int option = service.modifyRoutine(username, dto);
-        switch (option) {
-            case 0:
-                return ResponseEntity.status(HttpStatus.OK).body(Map.of("mesagge", "Modificado correcto"));
-            default:
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mesagge", "Error desconocido"));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "El id debe ser un número"));
         }
 
     }
@@ -116,14 +123,14 @@ public class RoutineController {
 
         try {
             int id = Integer.parseInt(routineid);
-            int option =service.deleteRoutine(id);
-            switch (option){
+            int option = service.deleteRoutine(id);
+            switch (option) {
                 case 0:
                     return ResponseEntity.ok().body(Map.of("mesagge", "Borrado correcta"));
                 case 1:
-                    return ResponseEntity.badRequest().body(Map.of("mesagge","La rutina no existe"));
+                    return ResponseEntity.badRequest().body(Map.of("mesagge", "La rutina no existe"));
                 default:
-                    return ResponseEntity.internalServerError().body(Map.of("mesagge","Error interno en el servidor"));
+                    return ResponseEntity.internalServerError().body(Map.of("mesagge", "Error interno en el servidor"));
             }
 
         } catch (NumberFormatException e) {
