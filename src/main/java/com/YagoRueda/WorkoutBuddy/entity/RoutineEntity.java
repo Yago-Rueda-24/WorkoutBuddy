@@ -19,7 +19,7 @@ public class RoutineEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExerciseEntity> exercises;
 
 

@@ -69,12 +69,14 @@ public class RoutineService {
             return 1;
         }
         RoutineEntity routine = routineRepository.findById(id);
+        routine.getExercises().clear();
+
         routine.setName(dto.getName());
         List<ExerciseEntity> exercises = dto.getExercises();
         for (ExerciseEntity ex : exercises) {
             ex.setRoutine(routine);
         }
-        routine.setExercises(exercises);
+        routine.getExercises().addAll(dto.getExercises());
         routineRepository.save(routine);
         return 0;
     }
