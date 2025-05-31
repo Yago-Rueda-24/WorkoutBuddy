@@ -1,5 +1,5 @@
 
-const title = document.querySelector(".content-title");
+const title = document.getElementById("titulo");
 const lista = document.querySelector(".component-list");
 const routine = sessionStorage.getItem("routine");
 const username = sessionStorage.getItem("user");
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Aquí usas el ID que corresponda. Podrías capturarlo dinámicamente desde query params si quieres hacerlo reutilizable.
     if (sessionStorage.getItem("insert") === "true") {
         console.log("1");
-
     } else {
         console.log("2");
         await retriveExercise(routine);
@@ -62,30 +61,63 @@ async function save() {
 
 
     if (!invalid) {
-        try {
-            const response = await fetch("/routine/add/" + username, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name: titulo, exercises })
-            });
-
-            if (response.status !== 201) {
-                const errorData = await response.json();
-                console.error("Errores del backend:", errorData);
-                throw new Error("Error al guardar los datos de la rutina");
-            } else {
-
-                alert("Rutina guardada correctamente");
-            }
-
-
-        } catch (error) {
-            console.error("Error al guardar la rutina:", error);
+        if (sessionStorage.getItem("insert") === "true") {
+            await addRoutine(username, titulo, exercises);
+            sessionStorage.setItem("insert", "false");
+            alert("Rutina guardada correctamente");
+        } else {
+            await editRoutine(routine, titulo, exercises);
+            alert("Rutina editada correctamente");
         }
     } else {
         alert(message);
+    }
+
+}
+
+async function addRoutine(username,name, exercises) {
+    try {
+        const response = await fetch("/routine/add/" + username, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, exercises })
+        });
+
+        if (response.status !== 201) {
+            const errorData = await response.json();
+            console.error("Errores del backend:", errorData);
+            throw new Error("Error al guardar los datos de la rutina");
+        } else {
+            alert("Rutina guardada correctamente");
+        }
+    } catch (error) {
+        console.error("Error al guardar la rutina:", error);
+    }
+
+    
+}
+
+async function editRoutine(id, name, exercises) {
+    try {
+        const response = await fetch("/routine/modify/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, exercises })
+        });
+
+        if (response.status !== 200) {
+            const errorData = await response.json();
+            console.error("Errores del backend:", errorData);
+            throw new Error("Error al editar los datos de la rutina");
+        } else {
+            alert("Rutina editada correctamente");
+        }
+    } catch (error) {
+        console.error("Error al editar la rutina:", error);
     }
 
 }
@@ -101,7 +133,7 @@ async function retriveExercise(routine) {
         const data = await response.json();
 
         // Mostrar el nombre de la rutina como título
-        title.textContent = data.name;
+        title.value = data.name;
 
         // Limpiar la lista actual
         lista.innerHTML = "";
