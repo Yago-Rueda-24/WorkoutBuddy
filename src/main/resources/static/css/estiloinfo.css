@@ -1,0 +1,208 @@
+  /* Estilos básicos */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #e8f5e9, #fff);
+      ;
+  }
+
+  /* Header */
+  header {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+  }
+  .linkAtras{
+        text-decoration: none;
+        color: #4CAF50;
+        font-weight: bold;
+        font-size: 16px;
+  }
+
+  .user-info {
+      font-size: 14px;
+      color: #4CAF50;
+      font-weight: bold;
+  }
+
+  /* Layout principal */
+  .main-container {
+      display: flex;
+      flex: 1;
+
+  }
+
+  /* Aside */
+  aside {
+      width: 250px;
+      background: linear-gradient(to bottom, #e8f5e9, #fff);
+      border-right: 1px solid #e0e0e0;
+      padding: 20px;
+  }
+
+  .search-box {
+      margin-bottom: 20px;
+  }
+
+  .search-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+  }
+
+  .search-input:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+
+  /* Contenedor principal */
+  .content {
+      flex: 1;
+      padding: 20px;
+      background-color: line;
+  }
+
+  .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+
+  .content-title {
+      font-size: 48px;
+      font-weight: bold;
+  }
+
+  /* Lista de componentes */
+  .component-list {
+      list-style: none;
+  }
+
+  .component-item {
+      background-color: #fff;
+      border-radius: 6px;
+      border: 3px solid #80d483;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      /* Cambiado para estirar los elementos hijos */
+      overflow: hidden;
+      /* Para mantener los bordes redondeados */
+  }
+
+  .component-name {
+      font-weight: bold;
+      font-size: large;
+      padding-left: 15px;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      flex: 1;
+  }
+
+  .component-details {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      flex: 1;
+      padding-left: 15px;
+      overflow: hidden;
+  }
+
+  .component-actions {
+      display: flex;
+  }
+
+  /* Botones */
+  .btn {
+      padding: 0 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s;
+      height: 100%;
+      /* Ocupa toda la altura */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .btn-add {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+  }
+
+  .btn-add:hover {
+      background-color: #3e8e41;
+  }
+
+  .btn-info {
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 0;
+  }
+
+  .btn-info:hover {
+      background-color: #3e8e41;
+  }
+
+  .btn-edit {
+      background-color: #2196F3;
+      color: white;
+      border-radius: 0;
+      /* Quitar bordes redondeados para los botones internos */
+  }
+
+  .btn-edit:hover {
+      background-color: #0b7dda;
+  }
+
+  .btn-delete {
+      background-color: #f44336;
+      color: white;
+      border-radius: 0;
+      /* Quitar bordes redondeados para los botones internos */
+  }
+
+  .btn-delete:hover {
+      background-color: #d32f2f;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+      .main-container {
+          flex-direction: column;
+      }
+
+      aside {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid #e0e0e0;
+      }
+  }

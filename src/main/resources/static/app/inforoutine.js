@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const title = document.querySelector(".content-title");
     const lista = document.querySelector(".component-list");
     const routine = sessionStorage.getItem("routine");
+    const username = sessionStorage.getItem("user");
     console.log(routine);
+
     // Aquí usas el ID que corresponda. Podrías capturarlo dinámicamente desde query params si quieres hacerlo reutilizable.
     fetch("/routine/exercise/" + routine)
         .then(response => response.json())
@@ -21,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     li.innerHTML = `
                         <span class="component-name">${ejercicio.name}</span>
-                        <span class="component-details">Reps: ${ejercicio.reps}  </span>
-                        <span class="component-date">Sets: ${ejercicio.sets}</span>
+                        <span class="component-details">Reps ${ejercicio.reps}  </span>
+                        <span class="component-details">Sets ${ejercicio.sets}</span>
                     `;
 
                     
