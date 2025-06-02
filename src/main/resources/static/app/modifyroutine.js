@@ -146,7 +146,9 @@ async function retriveExercise(routine) {
 
                 li.innerHTML = `
                     <input type="text" class="component-name" value="${ejercicio.name}">
+                    <p>Repeticiones</p>
                     <input type="number" class="component-reps" value="${ejercicio.reps}" placeholder="Reps" min="1" max="100">
+                    <p>Sets</p>
                     <input type="number" class="component-sets" value="${ejercicio.sets}" placeholder="Sets" min="1" max="100">
                     <div class="component-actions">
                         <button class="btn btn-delete" data-id="${ejercicio.id}">Eliminar</button>
