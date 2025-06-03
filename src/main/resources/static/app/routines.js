@@ -8,6 +8,7 @@ document.getElementById("btnAdd").addEventListener("click", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("user-info").textContent = username;
     retriveRoutine();
 });
 
