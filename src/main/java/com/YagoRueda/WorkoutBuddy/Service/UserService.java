@@ -59,6 +59,7 @@ public class UserService {
         //Guardar la información del usuario en base de datos
         UserEntity user = new UserEntity();
         user.setUsername(signup.getUsername());
+        user.setEmail(signup.getEmail());
         user.setPassword(new String(hashed_password, StandardCharsets.UTF_8));
         repository.save(user);
         return 0;
