@@ -1,8 +1,14 @@
 
 async function signup() {
   const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const passwordrepeat = document.getElementById("passwordrepeat").value;
+
+  if (!username || !email || !password || !passwordrepeat) {
+    alert("Por favor, completa todos los campos.");
+    return;
+  }
 
   try {
     const response = await fetch("/login/signup", {
@@ -14,6 +20,7 @@ async function signup() {
         username: username,
         password: password,
         passwordrepeat: passwordrepeat,
+        email: email
       }),
     });
 
