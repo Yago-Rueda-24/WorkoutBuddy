@@ -10,6 +10,8 @@ public class SignupDTO {
     private String password;
     @NotBlank(message = "La password es obligatoria")
     private String passwordrepeat;
+    @NotBlank(message = "El email es obligatorio")
+    private String email;
 
     public String getPassword() {
         return password;
@@ -30,4 +32,12 @@ public class SignupDTO {
     public String getPasswordrepeat() {return passwordrepeat; }
 
     public void setPasswordrepeat(String passwordrepeat) { this.passwordrepeat = passwordrepeat; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

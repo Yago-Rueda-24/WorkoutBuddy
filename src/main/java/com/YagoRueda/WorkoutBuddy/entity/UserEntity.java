@@ -16,8 +16,10 @@ public class UserEntity {
     private String username;
     @NotBlank(message = "La password es obligatoria")
     private String password;
+    @NotBlank(message = "El email es obligatorio")
+    private String email;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<RoutineEntity> routines;
 
     public String getPassword() {
@@ -38,5 +40,13 @@ public class UserEntity {
 
     public long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
