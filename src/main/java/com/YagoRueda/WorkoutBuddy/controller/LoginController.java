@@ -68,7 +68,7 @@ public class LoginController {
     @GetMapping("/password/{username}")
     public ResponseEntity<?> lostPassword(@PathVariable String username) {
         try{
-            mailService.lostPassword(username);
+            service.lostPassword(username);
             return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","operación correcta"));
         }catch (InpuDataException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message",e.getMessage()));
