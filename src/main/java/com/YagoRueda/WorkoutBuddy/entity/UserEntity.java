@@ -22,6 +22,11 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<RoutineEntity> routines;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PetPasswordEntity> petPasswords;
+
+
+
     public String getPassword() {
         return password;
     }
