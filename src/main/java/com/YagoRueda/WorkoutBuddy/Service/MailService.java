@@ -12,6 +12,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Properties;
 
@@ -30,7 +32,17 @@ public class MailService {
                 SimpleMailMessage mensaje = new SimpleMailMessage();
                 mensaje.setTo(user.getEmail());
                 mensaje.setSubject("Restablecimiento de contraseña");
-                mensaje.setText("Prueba");
+
+                String enlace = "http://localhost:8080/resetPassword.html"
+                        + "?user=" + URLEncoder.encode(user.getUsername(), StandardCharsets.UTF_8)
+                        + "&token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+                String texto = "Hola " + user.getUsername() + ",\n\n"
+                        + "Para restablecer tu contraseña, haz clic en el siguiente enlace:\n"
+                        + enlace + "\n\n"
+                        + "Este enlace solo es válido una vez y caduca pronto. \n\n"+
+                        "Si no has solicitado el cambio de contraseña ignora este mensaje";
+
+                mensaje.setText(texto);
                 mensaje.setFrom("Workoutbuddy@gmail.com");
                 mailSender.send(mensaje);
             }).start();
