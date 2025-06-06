@@ -1,9 +1,11 @@
 package com.YagoRueda.WorkoutBuddy.Service;
 
+import com.YagoRueda.WorkoutBuddy.DTO.RecoverPasswordDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.SignupDTO;
 import com.YagoRueda.WorkoutBuddy.entity.PetPasswordEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.exception.InpuDataException;
+import com.YagoRueda.WorkoutBuddy.exception.InvalidaPetitionException;
 import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
 import jakarta.mail.MessagingException;
@@ -18,6 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -119,6 +122,55 @@ public class UserService {
             throw new MessagingException(e.getMessage());
         }
 
+
+    }
+
+    public void changePassword(RecoverPasswordDTO dto) throws InpuDataException, InvalidaPetitionException {
+        String username = dto.getUsername();
+        String token = dto.getToken();
+        String password = dto.getPassword();
+        String repeatPassword = dto.getRepeatpassword();
+
+        // Validación de entradas
+        if (!password.equals(repeatPassword)) {
+            throw new InpuDataException("Las contraseñas no son iguales");
+        }
+
+        if(!repository.existsByUsername(username)){
+           throw new InpuDataException("El usuario no existe en el sistema");
+        }
+
+        // Recuperación y comprobaciones de la petición
+        PetPasswordEntity pet;
+        Optional<PetPasswordEntity> optional = petPasswordRepository.findByUsernameAndToken(username, token);
+        if (optional.isPresent()) {
+            pet = optional.get();
+
+            if (pet.getExpirado()) {
+                throw new InvalidaPetitionException("La petición ha expirado");
+            }
+            if (pet.getUtilizado()) {
+                throw new InvalidaPetitionException("La petición ya ha sido utilizada");
+            }
+
+            //Recuperación del usuario
+            UserEntity user = repository.findByUsername(username);
+
+            // hasheo de la password
+            hash.reset();
+            hash.update(password.getBytes());
+            byte[] hashed_password = this.hash.digest();
+
+            //Almacenmiento de la password
+            user.setPassword(new String(hashed_password, StandardCharsets.UTF_8));
+            repository.save(user);
+
+            //Actualización de la petición
+            pet.setUtilizado(true);
+            petPasswordRepository.save(pet);
+        } else {
+            throw new InpuDataException("No existe una petición activa para el usuario");
+        }
 
     }
 
