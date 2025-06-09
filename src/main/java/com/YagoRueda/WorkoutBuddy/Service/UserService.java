@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -113,6 +116,7 @@ public class UserService {
         pet.setUtilizado(false);
         String token = UUID.randomUUID().toString();
         pet.setToken(token);
+        pet.setPetition_date(Instant.now());
 
         petPasswordRepository.save(pet);
 
@@ -152,6 +156,15 @@ public class UserService {
             if (pet.getUtilizado()) {
                 throw new InvalidaPetitionException("La petición ya ha sido utilizada");
             }
+
+            Duration interval = Duration.between(pet.getPetition_date(), Instant.now());
+            if(interval.toMinutes()>10){
+                pet.setExpirado(true);
+                petPasswordRepository.save(pet);
+                throw new InvalidaPetitionException("La petición ha expirado");
+
+            }
+
 
             //Recuperación del usuario
             UserEntity user = repository.findByUsername(username);
