@@ -17,6 +17,7 @@
 
   /* Header */
   header {
+      display: flex;
       background-color: #fff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 15px 20px;
@@ -24,6 +25,23 @@
       top: 0;
       z-index: 100;
   }
+
+  .linkAtras {
+      margin-left: auto;
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+      font-size: 16px;
+  }
+  .linkAtras:hover {
+      margin-left: auto;
+      text-decoration: none;
+      color: #2f8f32;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+  }
+
 
   .user-info {
       font-size: 20px;

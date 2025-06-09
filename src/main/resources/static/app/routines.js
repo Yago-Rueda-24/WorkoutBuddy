@@ -8,13 +8,15 @@ document.getElementById("btnAdd").addEventListener("click", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("user-info").textContent = username;
     retriveRoutine();
 });
 
-function addExercise() {
-
-}
+document.getElementById("cerrarSesion").addEventListener("click", function () {
+    // Eliminar el usuario del sessionStorage
+    sessionStorage.removeItem("user");
+    // Redirigir a la página de inicio de sesión
+    window.location.href = "landingpage.html";
+});
 
 function deleteExercise(id) {
     // Petición a la API para eliminar el ejercicio
