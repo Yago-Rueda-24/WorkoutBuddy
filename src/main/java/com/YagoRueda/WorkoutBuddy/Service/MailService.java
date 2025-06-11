@@ -52,6 +52,29 @@ public class MailService {
 
     }
 
+    public void mailWelcome(UserEntity user) throws MailSendException, MailAuthenticationException {
+        try {
+            SimpleMailMessage mensaje = new SimpleMailMessage();
+            mensaje.setTo(user.getEmail());
+            mensaje.setSubject("Bienvenida a WorkOutBuddy");
+
+
+
+            String texto = "Hola " + user.getUsername() + ",\n\n"
+                    + "Bienvenido a Workoutbuddy\n\n"
+                    + "Este enlace solo es válido una vez y caduca pronto. \n\n" +
+                    "Si no has solicitado el cambio de contraseña ignora este mensaje";
+
+            mensaje.setText(texto);
+            mensaje.setFrom("Workoutbuddy@gmail.com");
+            sendMail(mensaje);
+        } catch (MailSendException e) {
+            throw new MailSendException("Error en el envio del mail");
+        } catch (MailAuthenticationException e) {
+            throw new MailAuthenticationException("Error en la autenticación del mail");
+        }
+    }
+
     private void sendMail(SimpleMailMessage mail) throws MailSendException, MailAuthenticationException {
 
         try {
