@@ -28,24 +28,22 @@ public class MailService {
 
     public void mailLostPassword(UserEntity user, String token) throws MailSendException, MailAuthenticationException {
         try {
-            new Thread(() -> {
-                SimpleMailMessage mensaje = new SimpleMailMessage();
-                mensaje.setTo(user.getEmail());
-                mensaje.setSubject("Restablecimiento de contraseña");
+            SimpleMailMessage mensaje = new SimpleMailMessage();
+            mensaje.setTo(user.getEmail());
+            mensaje.setSubject("Restablecimiento de contraseña");
 
-                String enlace = "http://localhost:8080/resetPassword.html"
-                        + "?user=" + URLEncoder.encode(user.getUsername(), StandardCharsets.UTF_8)
-                        + "&token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
-                String texto = "Hola " + user.getUsername() + ",\n\n"
-                        + "Para restablecer tu contraseña, haz clic en el siguiente enlace:\n"
-                        + enlace + "\n\n"
-                        + "Este enlace solo es válido una vez y caduca pronto. \n\n"+
-                        "Si no has solicitado el cambio de contraseña ignora este mensaje";
+            String enlace = "http://localhost:8080/resetPassword.html"
+                    + "?user=" + URLEncoder.encode(user.getUsername(), StandardCharsets.UTF_8)
+                    + "&token=" + URLEncoder.encode(token, StandardCharsets.UTF_8);
+            String texto = "Hola " + user.getUsername() + ",\n\n"
+                    + "Para restablecer tu contraseña, haz clic en el siguiente enlace:\n"
+                    + enlace + "\n\n"
+                    + "Este enlace solo es válido una vez y caduca pronto. \n\n" +
+                    "Si no has solicitado el cambio de contraseña ignora este mensaje";
 
-                mensaje.setText(texto);
-                mensaje.setFrom("Workoutbuddy@gmail.com");
-                mailSender.send(mensaje);
-            }).start();
+            mensaje.setText(texto);
+            mensaje.setFrom("Workoutbuddy@gmail.com");
+            sendMail(mensaje);
         } catch (MailSendException e) {
             throw new MailSendException("Error en el envio del mail");
         } catch (MailAuthenticationException e) {
@@ -53,4 +51,19 @@ public class MailService {
         }
 
     }
+
+    private void sendMail(SimpleMailMessage mail) throws MailSendException, MailAuthenticationException {
+
+        try {
+            new Thread(() -> {
+                mailSender.send(mail);
+
+            }).start();
+        } catch (MailSendException e) {
+            throw new MailSendException("Error en el envio del mail");
+        } catch (MailAuthenticationException e) {
+            throw new MailAuthenticationException("Error en la autenticación del mail");
+        }
+    }
+
 }
