@@ -1,4 +1,4 @@
-package com.YagoRueda.WorkoutBuddy.service;
+package com.YagoRueda.WorkoutBuddy.service.userServiceTest;
 
 import com.YagoRueda.WorkoutBuddy.DTO.RecoverPasswordDTO;
 import com.YagoRueda.WorkoutBuddy.Service.UserService;
@@ -6,7 +6,6 @@ import com.YagoRueda.WorkoutBuddy.entity.PetPasswordEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
-import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
