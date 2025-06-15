@@ -172,13 +172,15 @@ function addExercise() {
     const li = document.createElement("li");
     li.classList.add("component-item");
     li.innerHTML = `
-        <input type="text" class="component-name" placeholder="Nombre del ejercicio">
-        <input type="number" class="component-reps" placeholder="Reps" min="1" max="100">
-        <input type="number" class="component-sets" placeholder="Sets" min="1" max="100">
-        <div class="component-actions">
-            <button class="btn btn-delete">Eliminar</button>
-        </div>
-    `;
+                    <input type="text" class="component-name" placeholder="Nombre del ejercicio">
+                    <p>Repeticiones</p>
+                    <input type="number" class="component-reps"  placeholder="Reps" min="1" max="100">
+                    <p>Sets</p>
+                    <input type="number" class="component-sets"  placeholder="Sets" min="1" max="100">
+                    <div class="component-actions">
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                `;
     lista.appendChild(li);
 
     // Añadir evento de eliminación al botón
