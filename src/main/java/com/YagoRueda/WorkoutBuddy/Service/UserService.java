@@ -2,6 +2,7 @@ package com.YagoRueda.WorkoutBuddy.Service;
 
 import com.YagoRueda.WorkoutBuddy.DTO.RecoverPasswordDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.SignupDTO;
+import com.YagoRueda.WorkoutBuddy.DTO.UserInfoDTO;
 import com.YagoRueda.WorkoutBuddy.entity.PetPasswordEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.exception.InpuDataException;
@@ -10,6 +11,7 @@ import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -33,6 +36,8 @@ public class UserService {
     private MessageDigest hash;
 
     private final PetPasswordRepository petPasswordRepository;
+
+    private final int LIMITECONSULTA = 10;
 
     @Autowired
     private MailService mailService;
@@ -140,8 +145,8 @@ public class UserService {
             throw new InpuDataException("Las contraseñas no son iguales");
         }
 
-        if(!repository.existsByUsername(username)){
-           throw new InpuDataException("El usuario no existe en el sistema");
+        if (!repository.existsByUsername(username)) {
+            throw new InpuDataException("El usuario no existe en el sistema");
         }
 
         // Recuperación y comprobaciones de la petición
@@ -158,7 +163,7 @@ public class UserService {
             }
 
             Duration interval = Duration.between(pet.getPetition_date(), Instant.now());
-            if(interval.toMinutes()>10){
+            if (interval.toMinutes() > 10) {
                 pet.setExpirado(true);
                 petPasswordRepository.save(pet);
                 throw new InvalidaPetitionException("La petición ha expirado");
@@ -185,6 +190,36 @@ public class UserService {
             throw new InpuDataException("No existe una petición activa para el usuario");
         }
 
+    }
+
+    public List<UserInfoDTO> listLimitedUsers() {
+        List<UserEntity> entities = repository.findLimitedUsers(LIMITECONSULTA);
+        List<UserInfoDTO> users = entities.stream()
+                .map(entity -> {
+                    UserInfoDTO dto = new UserInfoDTO();
+                    dto.setId(entity.getId());
+                    dto.setUsername(entity.getUsername());
+                    return dto;
+                })
+                .toList();
+
+        return users;
+    }
+
+    public List<UserInfoDTO> listFilteredLimitedUsers(String filteredUsername) {
+
+        PageRequest pageRequest = PageRequest.of(0, LIMITECONSULTA);
+        List<UserEntity> entities = repository.findByUsernameStartingWith(filteredUsername, pageRequest);
+        List<UserInfoDTO> users = entities.stream()
+                .map(entity -> {
+                    UserInfoDTO dto = new UserInfoDTO();
+                    dto.setId(entity.getId());
+                    dto.setUsername(entity.getUsername());
+                    return dto;
+                })
+                .toList();
+
+        return users;
     }
 
 
