@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ejercicios</title>
+    <link rel="stylesheet" href="css/estilousers.css">
+</head>
+
+<body>
+    <!-- Header con usuario logueado -->
+    <header>
+        <h1>WorkOutBuddy</h1>
+        <ul class="navigation-links">
+            <li class="nav-element"><a class="nav-link" href="mainpage.html">Rutinas</a></li>
+            <li class="nav-element"><a class="actual-link" href="users.html">Social</a></li>
+        </ul>
+        <a class="linkAtras" id="cerrarSesion" > Cerrar Sesion</a>
+    </header>
+
+    <!-- Contenedor principal con aside y contenido -->
+    <div class="main-container">
+
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Encabezado con título y botón añadir -->
+            <div class="content-header">
+                <h1 class="content-title">Usuarios</h1>
+                <input id="search-input" type="text" class="search-input" placeholder="Buscar...">
+                <button id="search-button" class="btn">Buscar</button>
+            </div>
+
+            <!-- Lista de componentes -->
+            <ul class="component-list">
+                
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script src="/app/users.js"></script>
+
+</html>
