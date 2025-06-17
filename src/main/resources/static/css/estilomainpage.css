@@ -26,6 +26,30 @@
       z-index: 100;
   }
 
+  .navigation-links {
+      list-style: none;
+      font-size: 24px;
+      margin-right: 20px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+  }
+
+  .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 24px;
+  }
+  .actual-link {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+      font-size: 24px;
+  }
+
   .linkAtras {
       margin-left: auto;
       text-decoration: none;
@@ -33,6 +57,7 @@
       font-weight: bold;
       font-size: 16px;
   }
+
   .linkAtras:hover {
       margin-left: auto;
       text-decoration: none;
