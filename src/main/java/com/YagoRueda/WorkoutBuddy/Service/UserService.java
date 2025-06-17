@@ -192,9 +192,9 @@ public class UserService {
 
     }
 
-    public List<UserInfoDTO> listLimitedUsers() {
+    public List<UserInfoDTO> listLimitedUsers(String username) {
         List<UserEntity> entities = repository.findLimitedUsers(LIMITECONSULTA);
-        List<UserInfoDTO> users = entities.stream()
+        List<UserInfoDTO> users = entities.stream().filter(entity -> !entity.getUsername().equals(username))
                 .map(entity -> {
                     UserInfoDTO dto = new UserInfoDTO();
                     dto.setId(entity.getId());
@@ -206,11 +206,10 @@ public class UserService {
         return users;
     }
 
-    public List<UserInfoDTO> listFilteredLimitedUsers(String filteredUsername) {
-
+    public List<UserInfoDTO> listFilteredLimitedUsers(String filteredUsername, String username) {
         PageRequest pageRequest = PageRequest.of(0, LIMITECONSULTA);
         List<UserEntity> entities = repository.findByUsernameStartingWith(filteredUsername, pageRequest);
-        List<UserInfoDTO> users = entities.stream()
+        List<UserInfoDTO> users = entities.stream().filter(entity -> !entity.getUsername().equals(username))
                 .map(entity -> {
                     UserInfoDTO dto = new UserInfoDTO();
                     dto.setId(entity.getId());
