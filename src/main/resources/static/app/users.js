@@ -16,9 +16,10 @@ document.getElementById("search-button").addEventListener("click", function() {
 
 function retriveUsers() {
     const lista = document.querySelector(".component-list");
+    const username = sessionStorage.getItem("user");
 
     // Petición a la API
-    fetch("/social/users")
+    fetch("/social/users?exclude=" + username)
         .then(response => response.json())
         .then(data => {
 
@@ -62,9 +63,10 @@ function retriveUsers() {
 
 function retriveFilteredUsers(filter) {
     const lista = document.querySelector(".component-list");
+    const username = sessionStorage.getItem("user");
 
     // Petición a la API
-    fetch("/social/users/"+ filter)
+    fetch("/social/users/"+ filter+ "?exclude=" + username)
         .then(response => response.json())
         .then(data => {
 
@@ -105,3 +107,9 @@ function retriveFilteredUsers(filter) {
             console.error("Error al cargar ejercicios:", error);
         });
 }
+
+document.getElementById("cerrarSesion").addEventListener("click", function () {
+    
+    sessionStorage.removeItem("user");
+    window.location.href = "landingpage.html";
+});
