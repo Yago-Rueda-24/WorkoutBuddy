@@ -122,27 +122,31 @@
       flex-direction: column;
       gap: 10px;
   }
-  
-  .content-header > input {
-    max-width: 300px;
-    width: 100%;
-    border-radius: 12px;
+
+  .search-input {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 12px;
   }
-  .content-header > button{
-    max-width: 300px;
-    width: 100%;
-    border-radius: 12px;
-    padding: 10px;
-    background-color: #aaf0ad;
-    
+
+  .btn-header {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 10px;
+      background-color: #aaf0ad;
+      border: none;
+
   }
-  .content-header > button:hover{
-    max-width: 300px;
-    width: 100%;
-    border-radius: 12px;
-    padding: 10px;
-    background-color: #58c55e;
-    
+
+  .btn-header:hover {
+      border: none;
+      max-width: 300px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 10px;
+      background-color: #58c55e;
+
   }
 
 
