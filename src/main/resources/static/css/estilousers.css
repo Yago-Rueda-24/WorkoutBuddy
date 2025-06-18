@@ -140,6 +140,7 @@
   }
 
   .btn-header:hover {
+      cursor: pointer;
       border: none;
       max-width: 300px;
       width: 100%;
