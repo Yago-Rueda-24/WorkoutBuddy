@@ -24,37 +24,9 @@ function retriveUsers() {
         .then(data => {
 
             lista.innerHTML = "";
+            show_info(data);
 
-
-            data.forEach(user => {
-                const li = document.createElement("li");
-                li.classList.add("component-item");
-
-                li.innerHTML = `
-                    <span class="component-name">${user.username}</span>
-                    <div class="component-actions">
-                        <button class="btn btn-info">Seguir</button>
-                        <button class="btn btn-edit" >Perfil</button>
-                    </div>
-                `;
-
-                const infoBtn = li.querySelector(".btn-info");
-                infoBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("routine", ejercicio.id);
-                    // Redirigir con parámetro en la URL
-                    window.location.href = "inforoutine.html";
-                });
-
-                const editBtn = li.querySelector(".btn-edit");
-                editBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("routine", ejercicio.id);
-                    sessionStorage.setItem("insert", "false");
-                    // Redirigir con parámetro en la URL
-                    window.location.href = "modifyroutine.html";
-                });
-
-                lista.appendChild(li);
-            });
+            
         })
         .catch(error => {
             console.error("Error al cargar ejercicios:", error);
@@ -71,37 +43,8 @@ function retriveFilteredUsers(filter) {
         .then(data => {
 
             lista.innerHTML = "";
+            show_info(data);
 
-
-            data.forEach(user => {
-                const li = document.createElement("li");
-                li.classList.add("component-item");
-
-                li.innerHTML = `
-                    <span class="component-name">${user.username}</span>
-                    <div class="component-actions">
-                        <button class="btn btn-info">Seguir</button>
-                        <button class="btn btn-edit" >Perfil</button>
-                    </div>
-                `;
-
-                const infoBtn = li.querySelector(".btn-info");
-                infoBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("routine", ejercicio.id);
-                    // Redirigir con parámetro en la URL
-                    window.location.href = "inforoutine.html";
-                });
-
-                const editBtn = li.querySelector(".btn-edit");
-                editBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("routine", ejercicio.id);
-                    sessionStorage.setItem("insert", "false");
-                    // Redirigir con parámetro en la URL
-                    window.location.href = "modifyroutine.html";
-                });
-
-                lista.appendChild(li);
-            });
         })
         .catch(error => {
             console.error("Error al cargar ejercicios:", error);
@@ -113,3 +56,29 @@ document.getElementById("cerrarSesion").addEventListener("click", function () {
     sessionStorage.removeItem("user");
     window.location.href = "landingpage.html";
 });
+
+function show_info(users) {
+    const lista = document.querySelector(".component-list");
+    lista.innerHTML = "";
+
+    users.forEach(user => {
+        const li = document.createElement("li");
+        li.classList.add("component-item");
+
+        li.innerHTML = `
+            <span class="component-name">${user.username}</span>
+            <div class="component-actions">
+                <button class="btn btnseguir">Seguir</button>
+                <button class="btn btnperfil">Perfil</button>
+            </div>
+        `;
+
+        const perfilBtn = li.querySelector(".btnperfil");
+        perfilBtn.addEventListener("click", () => {
+            sessionStorage.setItem("search-user", user.username);
+            window.location.href = "userpage.html";
+        });
+
+        lista.appendChild(li);
+    });
+}
