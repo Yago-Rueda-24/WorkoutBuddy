@@ -47,18 +47,45 @@ header {
     font-size: 24px;
 }
 
-.linkAtras {
-    margin-left: auto;
+
+
+.fondoGradiente {
+    background: linear-gradient(135deg, #4CAF50 0%, #2f8f32 100%);
+}
+
+.divAtras {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.cerrarSesion {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cerrarSesion:hover {
     text-decoration: none;
     color: #4CAF50;
     font-weight: bold;
     font-size: 16px;
+    cursor: pointer;
+}
+
+.linkAtras {
+    margin-left: auto;
+    text-decoration: none;
+    color: #e5f0e6;
+    font-weight: bold;
+    font-size: 16px;
+
 }
 
 .linkAtras:hover {
     margin-left: auto;
     text-decoration: none;
-    color: #2f8f32;
+    color: #000000;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
@@ -66,7 +93,6 @@ header {
 
 
 .profile-header {
-    background: linear-gradient(135deg, #4CAF50 0%, #2f8f32 100%);
     padding: 60px 20px;
     text-align: center;
     color: white;
@@ -141,7 +167,7 @@ header {
     max-width: 800px;
     margin: 0 auto;
     padding: 60px 20px;
-    
+
 }
 
 .section {
@@ -220,7 +246,8 @@ header {
     background: #f8f9fa;
     padding: 30px;
     border-radius: 12px;
-    border-left: 4px solid #2f8f32;;
+    border-left: 4px solid #2f8f32;
+    ;
     margin: 0;
 }
 
@@ -277,6 +304,65 @@ header {
     height: 22px;
     fill: currentColor;
 }
+
+.component-list {
+    list-style: none;
+}
+
+.component-item {
+    background-color: #fff;
+    border-radius: 6px;
+    border: 3px solid #80d483;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    /* Cambiado para estirar los elementos hijos */
+    overflow: hidden;
+    /* Para mantener los bordes redondeados */
+}
+
+.component-name {
+    font-weight: 500;
+    padding: 15px 10px;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.component-actions {
+    display: flex;
+}
+
+/* Botones */
+.btn {
+    padding: 0 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+    height: 100%;
+    /* Ocupa toda la altura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-info {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 0;
+}
+
+.btn-info:hover {
+    background-color: #3e8e41;
+}
+
 
 /* Footer */
 .footer {
