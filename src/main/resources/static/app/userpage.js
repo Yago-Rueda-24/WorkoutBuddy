@@ -39,7 +39,7 @@ function retriveRoutine() {
                 infoBtn.addEventListener("click", () => {
                     sessionStorage.setItem("routine", ejercicio.id);
                     // Redirigir con parámetro en la URL
-                    window.location.href = "inforoutine.html";
+                    window.location.href = "inforoutine.html?from=userpage";
                 });
 
                 lista.appendChild(li);

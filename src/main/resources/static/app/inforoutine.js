@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lista = document.querySelector(".component-list");
     const routine = sessionStorage.getItem("routine");
     const username = sessionStorage.getItem("user");
+    const volver = document.getElementById("linkAtras");
     console.log(routine);
 
     // Aquí usas el ID que corresponda. Podrías capturarlo dinámicamente desde query params si quieres hacerlo reutilizable.
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="component-details">Sets ${ejercicio.sets}</span>
                     `;
 
-                    
+
                     lista.appendChild(li);
                 });
             } else {
@@ -38,3 +39,19 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error al cargar la rutina:", error);
         });
 });
+
+document.getElementById("linkAtras").addEventListener("click", function () {
+    atras();
+});
+
+function atras() {
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get("from");
+
+    if (from) {
+        window.location.href = "/" + from + ".html";
+    } else {
+        window.history.back(); // fallback si no hay parámetro
+    }
+
+}
