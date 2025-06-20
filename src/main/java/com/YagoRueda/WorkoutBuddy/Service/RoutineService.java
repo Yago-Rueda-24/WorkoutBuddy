@@ -25,16 +25,31 @@ public class RoutineService {
         this.exerciseRepository = exerciseRepository;
     }
 
+    /**
+     * Servicio que obtiene todas las rutinas de un usuario
+     * @param username Nombre del usuario del que se obtendran las rutinas
+     * @return Lista de rutinas del usuario
+     */
     public List<RoutineEntity> obtainRoutinesByUsername(String username) {
         return routineRepository.findByUserUsername(username);
 
     }
 
+    /**
+     * Servicio que obtiene todos los ejercicios de una rutina
+     * @param id ID de la rutina de la que se obtendran los ejercicios
+     * @return Lista de ejercicios
+     */
     public RoutineEntity obtainExerciseByRoutine(int id) {
         return routineRepository.findById(id);
     }
 
-
+    /**
+     * Servicio que añade una rutina nueva a las rutinas de un usuario. La rutina también puede contener ejercicios
+     * @param username Nombre de usuario propietario de la rutina
+     * @param dto DTO que contiene la información de la rutina
+     * @return Entero que representa el estado de la operación
+     */
     public int addRoutine(String username, RoutineDTO dto) {
 
         if (dto.getExercises() == null || dto.getExercises().isEmpty()) {
@@ -62,6 +77,12 @@ public class RoutineService {
 
     }
 
+    /**
+     * Servicio que modifica una rutina de un usuario. La rutina también puede contener ejercicios
+     * @param id ID de la rutina modificada
+     * @param dto DTO que contiene la información de la rutina
+     * @return Entero que representa el estado de la operación
+     */
     public int modifyRoutine(long id, RoutineDTO dto) {
 
         if (!routineRepository.existsById(id)) {
@@ -81,6 +102,11 @@ public class RoutineService {
         return 0;
     }
 
+    /**
+     * Servicio que elimina una rutina de un usuario.
+     * @param id ID de la rutina a eliminar
+     * @return Entero que representa el estado de la operación
+     */
     public int deleteRoutine(long id) {
         if (!routineRepository.existsById(id)) {
             //La rutina no existe
