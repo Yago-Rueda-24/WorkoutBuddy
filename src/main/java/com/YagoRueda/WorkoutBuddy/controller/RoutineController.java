@@ -25,6 +25,11 @@ public class RoutineController {
         this.service = service;
     }
 
+    /**
+     * Devuelve todas las rutinas pertenecientes a un usuario
+     * @param username nombre del usuario que sera usado en la busqueda
+     * @return respuesta HTTP cuyo cuerpo tiene información sobre las rutinas
+     */
     @GetMapping("/{username}")
     public ResponseEntity<?> showRoutine(@PathVariable String username) {
         if (username == null || username.trim().isEmpty()) {
@@ -50,6 +55,11 @@ public class RoutineController {
 
     }
 
+    /**
+     * Devuelve todos los ejercicios pertenecientes a una rutina
+     * @param routineid id de la rutina que se usara en la busqueda
+     * @return respuesta HTTP cuyo cuerpo tiene información sobre los ejercicios
+     */
     @GetMapping("/exercise/{routineid}")
     public ResponseEntity<?> showExercise(@PathVariable String routineid) {
         if (routineid == null || routineid.trim().isEmpty()) {
@@ -72,6 +82,13 @@ public class RoutineController {
         }
     }
 
+    /**
+     * Añade una nueva rutina a la lista de rutinas de un usuario. En el cuerpo se puede pasar información de la rutina y además se puede pasar información sobre
+     * los ejercicios de esta
+     * @param username nombre de usuario al que se añadira la rutina
+     * @param dto DTO con información de la rutina y de los ejercicios dentro de esta
+     * @return Respuesta HTTP que indica si el añadido es exitoso. Devuelve OK en caso exitoso ,BAD_REQUEST y INTERNAL_SERVER_ERROR en caso de fallo
+     */
     @PostMapping("/add/{username}")
     public ResponseEntity<?> addRoutine(@PathVariable String username, @RequestBody @Valid RoutineDTO dto) {
         int option = service.addRoutine(username, dto);
@@ -88,6 +105,13 @@ public class RoutineController {
 
     }
 
+    /**
+     * Modifica los datos de una rutina existente. En el cuerpo se puede pasar información de la rutina y además se puede pasar información sobre
+     * los ejercicios de esta
+     * @param routineid ID de la rutina a modificar
+     * @param dto DTO con información de la rutina y de los ejercicios dentro de esta
+     * @return Respuesta HTTP que indica si la modificación es exitosa. Devuelve OK en caso exitoso ,BAD_REQUEST y INTERNAL_SERVER_ERROR en caso de fallo
+     */
     @PutMapping("/modify/{routineid}")
     public ResponseEntity<?> modifyRoutine(@PathVariable String routineid, @RequestBody @Valid RoutineDTO dto) {
         if (routineid == null || routineid.trim().isEmpty()) {
@@ -114,7 +138,12 @@ public class RoutineController {
 
     }
 
-
+    /**
+     * Elimina los datos de una rutina existente. En el cuerpo se puede pasar información de la rutina y además se puede pasar información sobre
+     * los ejercicios de esta
+     * @param routineid ID de la rutina a modificar
+     * @return Respuesta HTTP que indica si la eliminación es exitosa. Devuelve OK en caso exitoso ,BAD_REQUEST y INTERNAL_SERVER_ERROR en caso de fallo
+     */
     @DeleteMapping("/delete/{routineid}")
     public ResponseEntity<?> deleteRoutine(@PathVariable String routineid) {
         if (routineid == null || routineid.trim().isEmpty()) {
