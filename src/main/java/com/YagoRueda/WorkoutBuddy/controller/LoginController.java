@@ -30,12 +30,20 @@ public class LoginController {
         this.service = service;
     }
 
-
+    /**
+     * Devuelve todos los socios de BD
+     * @return List de entidades de usuario
+     */
     @GetMapping("/show")
     public List<UserEntity> showUsers() {
         return service.findAll();
     }
 
+    /**
+     * Enpoint para el logeo del uusario en el servicio
+     * @param user Entidad de usuario que representa los datos del usuario que se intenta logear
+     * @return Respuesta HTTP que indica si el logeo es exitoso. Devuelve OK en caso exitoso y UNAUTHORIZED en caso de fallo
+     */
     @PostMapping("/trylog")
     public ResponseEntity<?> logUser(@RequestBody UserEntity user) {
 
@@ -46,6 +54,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Endpoint para el registro de un nuevo usuario
+     * @param signup DTO que representa la información para la signup
+     * @return Respuesta HTTP que indica si el registro es exitoso. Devuelve OK en caso exitoso y CONFLICT en caso de fallo
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@Valid @RequestBody SignupDTO signup) {
 
@@ -66,6 +79,12 @@ public class LoginController {
                 return null;
         }
     }
+
+    /**
+     * Endpoint para la solicitud de un cambio de password
+     * @param username nombre de usuario que ha solicitado el restablecimiento de password
+     * @return Respuesta HTTP que indica si la petición de restablecimiento es exitosa. Devuelve OK en caso exitoso ,BAD_REQUEST y INTERNAL_SERVER_ERROR en caso de fallo
+     */
     @GetMapping("/password/{username}")
     public ResponseEntity<?> lostPassword(@PathVariable String username) {
         try{
@@ -78,6 +97,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Endpoint para responder a la solicitud de reestablecimineto de contraseñas
+     * @param dto DTO con la información para llevar a cabo el reestablecimiento de contraseña
+     * @return Respuesta HTTP que indica si la respuesta de restablecimiento es exitosa. Devuelve OK en caso exitoso y INTERNAL_SERVER_ERROR en caso de fallo
+     */
     @PostMapping("/resetPassword")
     public ResponseEntity<?> changePassword(@Valid @RequestBody RecoverPasswordDTO dto){
         if(dto == null){
