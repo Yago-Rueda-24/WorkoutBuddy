@@ -38,13 +38,19 @@
 
 ##  Overview
 
-<code>❯ REPLACE-ME</code>
+WorkoutBuddy es una aplicación web que ayuda a los usuarios a organizar y guardar sus rutinas de entrenamiento. Permite crear una cuenta, gestionar ejercicios personalizados y mantener un registro de sus entrenamientos de manera sencilla y segura. Es ideal para quienes quieren llevar un seguimiento digital de su progreso físico.
 
 ---
 
 ##  Features
 
-<code>❯ REPLACE-ME</code>
+👤 Registro e inicio de sesión: Los usuarios pueden crear una cuenta y acceder con su nombre de usuario y contraseña.
+
+🔐 Recuperación de contraseña: Si olvidan su clave, pueden recuperarla mediante un enlace enviado por correo electrónico.
+
+🏋️ Gestión de rutinas: Cada usuario puede crear rutinas con los ejercicios que desee, indicando repeticiones y series para cada uno.
+
+🔍 Búsqueda de usuarios: Permite buscar a otros usuarios dentro de la plataforma por su nombre (por ejemplo, para mostrarlos en una lista o rankings).
 
 ---
 
