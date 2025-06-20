@@ -2,7 +2,6 @@
 <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="right" width="30%" style="margin: -20px 0 0 20px;">
 <h1>WORKOUTBUDDY</h1>
 <p align="left">
-	<em><code>❯ REPLACE-ME</code></em>
 </p>
 <p align="left">
 	<img src="https://img.shields.io/github/license/Yago-Rueda-24/WorkoutBuddy?style=default&logo=opensourceinitiative&logoColor=white&color=05c71b" alt="license">
@@ -27,13 +26,7 @@
 - [ Getting Started](#-getting-started)
   - [ Prerequisites](#-prerequisites)
   - [ Installation](#-installation)
-  - [ Usage](#-usage)
-  - [ Testing](#-testing)
-- [ Project Roadmap](#-project-roadmap)
 - [ Contributing](#-contributing)
-- [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
-
 ---
 
 ##  Overview
