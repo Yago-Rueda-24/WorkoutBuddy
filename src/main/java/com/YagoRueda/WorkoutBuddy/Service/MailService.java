@@ -26,6 +26,13 @@ public class MailService {
     public MailService(UserRepository repository) {
     }
 
+    /**
+     * Servicio que construye un mensaje de mail para reestablcer la contraseña de un usuario
+     * @param user Entidad de usuario al que se le enviara el correo
+     * @param token Token de la petición de reestablecimiento de contraseña
+     * @throws MailSendException
+     * @throws MailAuthenticationException
+     */
     public void mailLostPassword(UserEntity user, String token) throws MailSendException, MailAuthenticationException {
         try {
             SimpleMailMessage mensaje = new SimpleMailMessage();
@@ -52,6 +59,12 @@ public class MailService {
 
     }
 
+    /**
+     * Servicio que crea un mensaje de bienvenida a un usario recien registrado
+     * @param user Entidad de usuario al que se le enviara el correo
+     * @throws MailSendException
+     * @throws MailAuthenticationException
+     */
     public void mailWelcome(UserEntity user) throws MailSendException, MailAuthenticationException {
         try {
             SimpleMailMessage mensaje = new SimpleMailMessage();
@@ -75,6 +88,12 @@ public class MailService {
         }
     }
 
+    /**
+     * Servicio que envia el mensaje pasado por paremtro a un usuario por e-mail
+     * @param mail Mensaje que enviara la aplicación
+     * @throws MailSendException
+     * @throws MailAuthenticationException
+     */
     private void sendMail(SimpleMailMessage mail) throws MailSendException, MailAuthenticationException {
 
         try {
