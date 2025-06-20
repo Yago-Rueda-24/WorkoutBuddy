@@ -20,7 +20,11 @@ public class SocialController {
         this.userservice = userservice;
     }
 
-
+    /**
+     * Endpoint para recuperar una lista de usuarios. Su longitud está limitada por un parametro en el servicio
+     * @param exclude Nombre de usuario que se excluira en la lista. Debe ser el usuario que efectuo la busqueda
+     * @return La lista de usuarios
+     */
     @GetMapping("/users")
     public ResponseEntity<?> listUsers(@RequestParam String exclude) {
 
@@ -31,6 +35,13 @@ public class SocialController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Error interno"));
     }
 
+    /**
+     * Endpoint para recuperar una lista de usuarios, utilizando un filtro para el nombre de los usuarios buscados.
+     * Su longitud está limitada por un parametro en el servicio
+     * @param filteredname Filtro utilizado para filtrar los usuarios quese añadiran a la lista
+     * @param exclude Nombre de usuario que se excluira en la lista. Debe ser el usuario que efectuo la busqueda
+     * @return La lista de usuarios filtrada
+     */
     @GetMapping("/users/{filteredname}")
     public ResponseEntity<?> listUsers(@PathVariable String filteredname, @RequestParam String exclude) {
 
