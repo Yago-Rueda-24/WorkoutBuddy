@@ -58,6 +58,12 @@ public class UserService {
         return repository.findAll();
     }
 
+    /**
+     * Realiza el proceso de login verificando credenciales del usuario.
+     *
+     * @param user el usuario con nombre y contraseña a validar
+     * @return {@code true} si las credenciales son válidas, de lo contrario {@code false}
+     */
     public boolean login(UserEntity user) {
 
         hash.reset();
@@ -71,6 +77,12 @@ public class UserService {
         return foundUser.getPassword().equals(new String(hashed_password, StandardCharsets.UTF_8));
     }
 
+    /**
+     * Registra un nuevo usuario si los datos son válidos.
+     *
+     * @param signup datos de registro del usuario
+     * @return 0 si se registró correctamente, 1 si las contraseñas no coinciden, 2 si el usuario ya existe
+     */
     public int signUp(SignupDTO signup) {
         boolean exists = repository.existsByUsername(signup.getUsername());
         boolean correct_password = signup.getPasswordrepeat().equals(signup.getPassword());
@@ -92,6 +104,13 @@ public class UserService {
         return 0;
     }
 
+    /**
+     * Inicia el proceso de recuperación de contraseña enviando un token al correo del usuario.
+     *
+     * @param username nombre de usuario
+     * @throws InpuDataException  si los datos de entrada no son válidos
+     * @throws MessagingException si falla el envío del correo
+     */
     public void lostPassword(String username) throws InpuDataException, MessagingException {
         if (username == null || username.trim().isEmpty()) {
             throw new InpuDataException("El nombre de usuario no puede ser vacio");
@@ -134,6 +153,13 @@ public class UserService {
 
     }
 
+    /**
+     * Cambia la contraseña de un usuario mediante una petición válida de recuperación.
+     *
+     * @param dto DTO con los datos necesarios para el cambio de contraseña
+     * @throws InpuDataException         si los datos no son válidos
+     * @throws InvalidaPetitionException si la petición ha expirado o ya ha sido utilizada
+     */
     public void changePassword(RecoverPasswordDTO dto) throws InpuDataException, InvalidaPetitionException {
         String username = dto.getUsername();
         String token = dto.getToken();
@@ -192,6 +218,12 @@ public class UserService {
 
     }
 
+    /**
+     * Lista un número limitado de usuarios, excluyendo al que realiza la consulta.
+     *
+     * @param username nombre del usuario que realiza la petición
+     * @return lista de {@link UserInfoDTO} de otros usuarios
+     */
     public List<UserInfoDTO> listLimitedUsers(String username) {
         List<UserEntity> entities = repository.findLimitedUsers(LIMITECONSULTA);
         List<UserInfoDTO> users = entities.stream().filter(entity -> !entity.getUsername().equals(username))
@@ -206,6 +238,13 @@ public class UserService {
         return users;
     }
 
+    /**
+     * Lista de usuarios cuyo nombre comienza con cierto filtro, excluyendo al usuario que realiza la búsqueda.
+     *
+     * @param filteredUsername prefijo del nombre de usuario a buscar
+     * @param username         nombre del usuario solicitante para excluirlo del resultado
+     * @return lista de {@link UserInfoDTO} que coinciden con el filtro
+     */
     public List<UserInfoDTO> listFilteredLimitedUsers(String filteredUsername, String username) {
         PageRequest pageRequest = PageRequest.of(0, LIMITECONSULTA);
         List<UserEntity> entities = repository.findByUsernameStartingWith(filteredUsername, pageRequest);
