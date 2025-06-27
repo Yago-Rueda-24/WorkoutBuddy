@@ -6,6 +6,7 @@ import com.YagoRueda.WorkoutBuddy.entity.PetPasswordEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ public class UserServiceTest {
     @Autowired
     private PetPasswordRepository petPasswordRepository;
 
+
+    @AfterEach
+    void borrarUserPruebas(){
+        UserEntity u = userRepository.findByUsername("usuarioTest");
+        if(u!= null){
+            userRepository.delete(u);
+        }
+    }
 
     @Test
     void crearPeticionDeRecuperacion() {
