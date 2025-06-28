@@ -8,6 +8,7 @@ import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.exception.InpuDataException;
 import com.YagoRueda.WorkoutBuddy.exception.InvalidaPetitionException;
 import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
+import com.YagoRueda.WorkoutBuddy.repository.RoutineRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class UserService {
     private final UserRepository repository;
     private MessageDigest hash;
 
+    private final RoutineRepository routine_repository;
+
     private final PetPasswordRepository petPasswordRepository;
 
     private final int LIMITECONSULTA = 10;
@@ -42,8 +45,9 @@ public class UserService {
     @Autowired
     private MailService mailService;
 
-    public UserService(UserRepository repository, PetPasswordRepository petPasswordRepository) {
+    public UserService(UserRepository repository, RoutineRepository routineRepository, PetPasswordRepository petPasswordRepository) {
         this.repository = repository;
+        this.routine_repository = routineRepository;
         this.petPasswordRepository = petPasswordRepository;
         try {
             this.hash = MessageDigest.getInstance("SHA-256");
@@ -260,5 +264,24 @@ public class UserService {
         return users;
     }
 
+    public UserInfoDTO GetUserInfo(String username) throws InpuDataException {
+
+        if (!repository.existsByUsername(username)) {
+            throw new InpuDataException("El usuario no existe en la base de datos");
+        }
+
+        UserEntity user = repository.findByUsername(username);
+
+        UserInfoDTO dto = new UserInfoDTO();
+
+        int num_routines = routine_repository.findByUserUsername(username).size();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setRoutines(num_routines);
+
+        return dto;
+
+
+    }
 
 }
