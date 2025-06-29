@@ -30,25 +30,26 @@ function retriveUserData() {
     const routines = document.getElementById("profile_routines");
     const followers = document.getElementById("profile_followers");
     const followed = document.getElementById("profile_followed");
-    fetch("/social/" + search_user)
+    const followButton = document.getElementById("follow");
+    fetch("/social/info?follower=" + sessionStorage.getItem("user") + "&followed=" + sessionStorage.getItem("search-user"))
         .then(response => response.json())
         .then(data => {
+
             console.log("User data retrieved:", data);
-            if (data.routines) {
-                routines.textContent = data.routines;
+            if (data.following == true) {
+                followButton.textContent = "Dejar de seguir";
+                followButton.className = "btn-unfollow";
             } else {
-                routines.textContent = "No Info";
+                followButton.textContent = "Seguir";
+                followButton.className = "btn-follow";
             }
-            if (data.followers) {
-                followers.textContent = data.followers;
-            } else {
-                followers.textContent = "No Info";
-            }
-            if (data.followed) {
-                followed.textContent = data.followed;
-            } else {
-                followed.textContent = "No Info";
-            }
+
+            routines.textContent = data.routines;
+
+            followers.textContent = data.followers;
+
+            followed.textContent = data.followed;
+
         })
         .catch(error => {
             console.error("Error retrieving user data:", error);
