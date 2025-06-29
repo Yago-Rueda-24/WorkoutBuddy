@@ -55,6 +55,12 @@ public class SocialController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Error interno"));
     }
 
+    /**
+     * Endpoint que llama al servicio para obtener información sobre un usuario
+     * @param follower El username del usuario que hace la llamada para obtener información
+     * @param followed El username del usuario del que se desea obtener la información
+     * @return Respuesta HTTP que contiene el codigo de la transacción y DTO con información en caso de exito
+     */
     @GetMapping("/info")
     public ResponseEntity<?> GetUserInfo(@RequestParam String follower, @RequestParam String followed) {
 
@@ -67,6 +73,12 @@ public class SocialController {
 
     }
 
+    /**
+     * Endpoint para llamar al servicio de follow. Crea una relación de seguimiento entre 2 usuarios
+     * @param follower El username del usuario que sera el seguidor
+     * @param followed El username del usuario que sera el seguido
+     * @return Respuesta HTTP que contiene el codigo de la transacción y un mensaje sobre el estado de la transacción
+     */
     @PostMapping("/follow")
     public ResponseEntity<?> follow(@RequestParam String follower, @RequestParam String followed){
 
@@ -79,6 +91,13 @@ public class SocialController {
 
 
     }
+
+    /**
+     * Endpoint para llamar al servicio de unfollow. Elimina una relación de seguimiento entre 2 usuarios
+     * @param follower El username del usuario que sera el seguidor
+     * @param followed El username del usuario que sera el seguido
+     * @return Respuesta HTTP que contiene el codigo de la transacción y un mensaje sobre el estado de la transacción
+     */
     @PostMapping("/unfollow")
     public ResponseEntity<?> unfollow(@RequestParam String follower,@RequestParam String followed){
         try{
