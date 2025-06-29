@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.MailSendException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -25,12 +24,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -269,20 +265,32 @@ public class UserService {
         return users;
     }
 
-    public UserInfoDTO GetUserInfo(String username) throws InpuDataException {
+    public UserInfoDTO GetUserInfo( String follower,  String followed) throws InpuDataException {
 
-        if (!repository.existsByUsername(username)) {
-            throw new InpuDataException("El usuario no existe en la base de datos");
+        if (!repository.existsByUsername(followed)) {
+            throw new InpuDataException("El seguido no existe en la base de datos");
+        }
+        if (!repository.existsByUsername(follower)) {
+            throw new InpuDataException("El seguidor no existe en la base de datos");
         }
 
-        UserEntity user = repository.findByUsername(username);
 
+
+
+        UserEntity user_followed = repository.findByUsername(followed);
+        UserEntity user_follower = repository.findByUsername(follower);
+        boolean isfollowing =follow_repository.existsByFollowerAndFollowed(user_follower,user_followed);
+        long num_follower = follow_repository.countByFollowed(user_followed);
+        long num_followed = follow_repository.countByFollower(user_followed);
         UserInfoDTO dto = new UserInfoDTO();
 
-        int num_routines = routine_repository.findByUserUsername(username).size();
-        dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
+        int num_routines = routine_repository.findByUserUsername(followed).size();
+        dto.setId(user_followed.getId());
+        dto.setUsername(user_followed.getUsername());
         dto.setRoutines(num_routines);
+        dto.setFollowing(isfollowing);
+        dto.setFollowed(num_followed);
+        dto.setFollowers(num_follower);
 
         return dto;
 

@@ -55,14 +55,14 @@ public class SocialController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Error interno"));
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> GetUserInfo(@PathVariable String username) {
+    @GetMapping("/info")
+    public ResponseEntity<?> GetUserInfo(@RequestParam String follower, @RequestParam String followed) {
 
         try {
-            UserInfoDTO dto = userservice.GetUserInfo(username);
+            UserInfoDTO dto = userservice.GetUserInfo(follower,followed);
             return ResponseEntity.status(HttpStatus.OK).body(dto);
         } catch (InpuDataException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Error interno"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", e.getMessage()));
         }
 
     }
