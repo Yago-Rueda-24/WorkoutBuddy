@@ -9,4 +9,10 @@ public interface FollowRepository extends JpaRepository<FollowEntity,Long> {
     boolean existsByFollowerAndFollowed(UserEntity follower, UserEntity followed);
 
     FollowEntity findByFollowerAndFollowed(UserEntity follower, UserEntity followed);
+
+    long countByFollowed(UserEntity followed);
+
+    long countByFollower(UserEntity follower);
+
+
 }
