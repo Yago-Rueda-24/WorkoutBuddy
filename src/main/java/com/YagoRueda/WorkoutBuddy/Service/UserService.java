@@ -265,6 +265,13 @@ public class UserService {
         return users;
     }
 
+    /**
+     * Función de servicio para obtener los datos de un usuario
+     * @param follower El username del usuario que hace la llamada para obtener información
+     * @param followed El username del usuario del que se desea obtener la información
+     * @return {@link UserInfoDTO} con la información de un usuario
+     * @throws InpuDataException
+     */
     public UserInfoDTO GetUserInfo( String follower,  String followed) throws InpuDataException {
 
         if (!repository.existsByUsername(followed)) {
@@ -297,6 +304,12 @@ public class UserService {
 
     }
 
+    /**
+     * Función de servicio para el follow entre 2 usuarios
+     * @param follower El username del usuario que sera el seguidor
+     * @param followed El username del usuario que sera el seguido
+     * @throws InpuDataException
+     */
     public void follow(String follower, String followed) throws InpuDataException {
         if (!repository.existsByUsername(follower)) {
             throw new InpuDataException("No existe el seguidor");
@@ -324,6 +337,12 @@ public class UserService {
 
     }
 
+    /**
+     * Función de servicio para el unfollow entre 2 usuarios
+     * @param follower El username del usuario que sera el seguidor
+     * @param followed El username del usuario que sera el seguido
+     * @throws InpuDataException
+     */
     public void unfollow(String follower, String followed) throws InpuDataException {
         if (!repository.existsByUsername(follower)) {
             throw new InpuDataException("No existe el seguidor");
