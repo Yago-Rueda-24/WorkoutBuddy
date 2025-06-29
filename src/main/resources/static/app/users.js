@@ -68,7 +68,6 @@ function show_info(users) {
         li.innerHTML = `
             <span class="component-name">${user.username}</span>
             <div class="component-actions">
-                <button class="btn btnseguir">Seguir</button>
                 <button class="btn btnperfil">Perfil</button>
             </div>
         `;
