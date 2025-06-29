@@ -66,4 +66,26 @@ public class SocialController {
         }
 
     }
+
+    @PostMapping("/follow")
+    public ResponseEntity<?> follow(@RequestParam String follower, @RequestParam String followed){
+
+        try{
+            userservice.follow(follower,followed);
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Operacion correcta"));
+        }catch (InpuDataException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", e.getMessage()));
+        }
+
+
+    }
+    @PostMapping("/unfollow")
+    public ResponseEntity<?> unfollow(@RequestParam String follower,@RequestParam String followed){
+        try{
+            userservice.unfollow(follower,followed);
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Operacion correcta"));
+        }catch (InpuDataException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", e.getMessage()));
+        }
+    }
 }
