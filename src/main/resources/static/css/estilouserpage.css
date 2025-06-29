@@ -339,6 +339,15 @@ header {
     display: flex;
 }
 
+.error-message {
+    color: rgb(212, 58, 58);
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+
 /* Botones */
 .btn {
     padding: 0 20px;
@@ -351,6 +360,36 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.btn-follow {
+    background-color: #e2e7e2;
+    color: #45a049;
+    border-radius: 12px;
+    width: 120px;
+    height: 40px;
+    border: none;
+}
+
+.btn-follow:hover {
+    background-color: #c3c7c3;
+    color: #3a8a3e;
+    border-radius: 12px;
+}
+
+.btn-unfollow {
+    background-color: #e2e7e2;
+    color: #d9534f;
+    border-radius: 12px;
+    width: 120px;
+    height: 40px;
+    border: none;
+}
+
+.btn-unfollow:hover {
+    background-color: #c9302c;
+    color: #c3c7c3;
+    border-radius: 12px;
 }
 
 .btn-info {
