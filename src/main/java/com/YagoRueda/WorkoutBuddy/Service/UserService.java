@@ -3,10 +3,12 @@ package com.YagoRueda.WorkoutBuddy.Service;
 import com.YagoRueda.WorkoutBuddy.DTO.RecoverPasswordDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.SignupDTO;
 import com.YagoRueda.WorkoutBuddy.DTO.UserInfoDTO;
+import com.YagoRueda.WorkoutBuddy.entity.FollowEntity;
 import com.YagoRueda.WorkoutBuddy.entity.PetPasswordEntity;
 import com.YagoRueda.WorkoutBuddy.entity.UserEntity;
 import com.YagoRueda.WorkoutBuddy.exception.InpuDataException;
 import com.YagoRueda.WorkoutBuddy.exception.InvalidaPetitionException;
+import com.YagoRueda.WorkoutBuddy.repository.FollowRepository;
 import com.YagoRueda.WorkoutBuddy.repository.PetPasswordRepository;
 import com.YagoRueda.WorkoutBuddy.repository.RoutineRepository;
 import com.YagoRueda.WorkoutBuddy.repository.UserRepository;
@@ -40,15 +42,18 @@ public class UserService {
 
     private final PetPasswordRepository petPasswordRepository;
 
+    private final FollowRepository follow_repository;
+
     private final int LIMITECONSULTA = 10;
 
     @Autowired
     private MailService mailService;
 
-    public UserService(UserRepository repository, RoutineRepository routineRepository, PetPasswordRepository petPasswordRepository) {
+    public UserService(UserRepository repository, RoutineRepository routineRepository, PetPasswordRepository petPasswordRepository, FollowRepository followRepository) {
         this.repository = repository;
         this.routine_repository = routineRepository;
         this.petPasswordRepository = petPasswordRepository;
+        follow_repository = followRepository;
         try {
             this.hash = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
@@ -281,6 +286,55 @@ public class UserService {
 
         return dto;
 
+
+    }
+
+    public void follow(String follower, String followed) throws InpuDataException {
+        if (!repository.existsByUsername(follower)) {
+            throw new InpuDataException("No existe el seguidor");
+        }
+        if (!repository.existsByUsername(followed)) {
+            throw new InpuDataException("No existe el seguido");
+        }
+
+
+        UserEntity user_follower = repository.findByUsername(follower);
+
+        UserEntity user_followed = repository.findByUsername(followed);
+
+        if (user_followed.getId() == user_follower.getId()) {
+            throw new InpuDataException("Un usuario no se puede seguir a si mismo");
+        }
+        if (follow_repository.existsByFollowerAndFollowed(user_follower, user_followed)) {
+            throw new InpuDataException("los usuarios ya se estan siguiendo");
+        }
+
+        FollowEntity follow = new FollowEntity();
+        follow.setFollower(user_follower);
+        follow.setFollowed(user_followed);
+        follow_repository.save(follow);
+
+    }
+
+    public void unfollow(String follower, String followed) throws InpuDataException {
+        if (!repository.existsByUsername(follower)) {
+            throw new InpuDataException("No existe el seguidor");
+        }
+        if (!repository.existsByUsername(followed)) {
+            throw new InpuDataException("No existe el seguido");
+        }
+
+        UserEntity user_follower = repository.findByUsername(follower);
+
+        UserEntity user_followed = repository.findByUsername(followed);
+
+        if (!follow_repository.existsByFollowerAndFollowed(user_follower, user_followed)) {
+            throw new InpuDataException("no existe la relacion entre usuarios");
+        }
+
+
+        FollowEntity follow = follow_repository.findByFollowerAndFollowed(user_follower, user_followed);
+        follow_repository.delete(follow);
 
     }
 
